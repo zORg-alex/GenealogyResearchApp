@@ -1,0 +1,64 @@
+﻿<UserControl x:Class="GenealogyResearchApp.View.Controls.WindowButtons"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:c="clr-namespace:GenealogyResearchApp.View.Controls"
+             xmlns:shell="clr-namespace:Microsoft.Windows.Shell;assembly=Xceed.Wpf.AvalonDock"
+             mc:Ignorable="d" 
+             d:DesignHeight="50" d:DesignWidth="150" VerticalAlignment="Top" HorizontalAlignment="Right">
+    <UserControl.Resources>
+		<ResourceDictionary>
+            <!--<ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Viewer;component/Themes/BasicTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>-->
+
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Top" shell:WindowChrome.IsHitTestVisibleInChrome="True" HorizontalAlignment="Right" Height="20">
+
+        <c:zButton x:Name="Minimize" Width="32" Click="MinimizeButton_Click" >
+            <Border Width="10" Height="9" BorderBrush="White" BorderThickness="0,0,0,2" SnapsToDevicePixels="True"/>
+        </c:zButton>
+
+        <c:zButton x:Name="Restore" Margin="1,0,1,0" Width="32" Click="RestoreButton_Click">
+            <Grid Width="10" Height="9">
+                <Border Width="8" Height="6" BorderBrush="White" BorderThickness="1,2,1,1"
+												SnapsToDevicePixels="True" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                <Border Width="8" Height="6" BorderBrush="White" BorderThickness="0,2,1,0"
+												SnapsToDevicePixels="True" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+            </Grid>
+            <c:zButton.Style>
+                <Style TargetType="{x:Type c:zButton}" BasedOn="{StaticResource {x:Type c:zButton}}">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding WindowState, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Value="Maximized">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </c:zButton.Style>
+        </c:zButton>
+
+        <c:zButton x:Name="Maximize" Margin="1,0,1,0" Width="32" Click="MaximizeButton_Click">
+            <Border Width="10" Height="9" BorderBrush="White" BorderThickness="1,2,1,1" SnapsToDevicePixels="True"/>
+            <c:zButton.Style>
+                <Style TargetType="{x:Type c:zButton}" BasedOn="{StaticResource {x:Type c:zButton}}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding WindowState, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Value="Maximized">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </c:zButton.Style>
+        </c:zButton>
+
+        <c:zButton x:Name="Close" Width="32" Highlight="#BFDA605B" Pressed="#BFCA3333" Click="CloseButton_Click" >
+            <Border Width="12" Height="11" RenderTransform="1,0,0,1,0,1">
+                <Path Data="M0,0 L8,7 M8,0 L0,7 Z" Width="8" Height="7" VerticalAlignment="Center" HorizontalAlignment="Center" StrokeThickness="1.5" Stroke="White"/>
+            </Border>
+        </c:zButton>
+
+    </StackPanel>
+</UserControl>
