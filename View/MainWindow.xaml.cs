@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Runtime.InteropServices;
 using WinInterop = System.Windows.Interop;
 using System;
+using System.Reflection;
 
 namespace GenealogyResearchApp.View {
     /// <summary>
@@ -48,8 +49,15 @@ namespace GenealogyResearchApp.View {
             Left = x;
             Top = y;
         }
+		
+		private void Window_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e) {
+			var assembly = Assembly.GetAssembly(typeof(MainWindow));
+			var viewType = assembly.GetType(e.NewValue.GetType().Name.Replace("Model", ""));
+			var view = Activator.CreateInstance(viewType);
+			ViewFrame.Navigate(view);
+		}
 
-        protected override void OnClosing(CancelEventArgs e) {
+		protected override void OnClosing(CancelEventArgs e) {
             //Save settings on closing window
             ViewerSettings.Default.WindowStartWidth = Width;
             ViewerSettings.Default.WindowStartHeight = Height;

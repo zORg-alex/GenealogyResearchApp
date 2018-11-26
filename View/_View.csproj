@@ -56,6 +56,10 @@
     </StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EffectLibrary">
+      <HintPath>..\EffectLibrary\bin\Release\EffectLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework.Aero2" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -103,6 +107,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Pages\PersonView.xaml.cs">
+      <DependentUpon>PersonView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewerSettings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -129,6 +136,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\PersonView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\EmptyWindowStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -168,16 +179,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Convertors\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EffectLibrary\EffectLibrary.csproj">
-      <Project>{4a2eb513-0f07-45dc-8a2a-665124e5e623}</Project>
-      <Name>EffectLibrary</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ViewModel\_ViewModel.csproj">
       <Project>{7e1ca84f-c35b-4a09-8ec6-b16ac4cb7cd0}</Project>
       <Name>_ViewModel</Name>

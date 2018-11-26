@@ -33,6 +33,7 @@ namespace GenealogyResearchApp.View {
                 MainViewModel = new MainViewModel();
                 MainViewModelReady = true;
             });
+			w.Name = "MainViewModel Loader";
             w.Start();
 
             bool exit = false;
