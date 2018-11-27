@@ -4,197 +4,197 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="GRApp.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="EventPersons">
-          <Key>
-            <PropertyRef Name="EventsAttented_Id" />
-            <PropertyRef Name="Attendees_Id" />
-          </Key>
-          <Property Name="EventsAttented_Id" Type="int" Nullable="false" />
-          <Property Name="Attendees_Id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Events">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Type" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="PersonId" Type="int" Nullable="false" />
-          <Property Name="Place_Id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Persons">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Surname" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="BirthDate" Type="date" Nullable="false" />
-          <Property Name="DeathDate" Type="date" Nullable="false" />
-          <Property Name="BirthPlaceId" Type="int" Nullable="false" />
-          <Property Name="DeathPlaceId" Type="int" Nullable="false" />
-          <Property Name="Mother_Id" Type="int" Nullable="false" />
-          <Property Name="Father_Id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Places">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="PlaceId" Type="int" Nullable="false" />
-        </EntityType>
-        <Association Name="FK_EventPersons_Event">
-          <End Role="Events" Type="Self.Events" Multiplicity="1" />
-          <End Role="EventPersons" Type="Self.EventPersons" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Events">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="EventPersons">
-              <PropertyRef Name="EventsAttented_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EventPersons_Person">
-          <End Role="Persons" Type="Self.Persons" Multiplicity="1" />
-          <End Role="EventPersons" Type="Self.EventPersons" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Persons">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="EventPersons">
-              <PropertyRef Name="Attendees_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EventPlace">
-          <End Role="Places" Type="Self.Places" Multiplicity="1" />
-          <End Role="Events" Type="Self.Events" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Places">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Events">
-              <PropertyRef Name="Place_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PersonDeathPlace">
-          <End Role="Places" Type="Self.Places" Multiplicity="1" />
-          <End Role="Persons" Type="Self.Persons" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Places">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Persons">
-              <PropertyRef Name="DeathPlaceId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PersonEvent">
-          <End Role="Persons" Type="Self.Persons" Multiplicity="1" />
-          <End Role="Events" Type="Self.Events" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Persons">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Events">
-              <PropertyRef Name="PersonId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PersonFather">
-          <End Role="Persons" Type="Self.Persons" Multiplicity="1" />
-          <End Role="Persons1" Type="Self.Persons" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Persons">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Persons1">
-              <PropertyRef Name="Father_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PersonMother">
-          <End Role="Persons" Type="Self.Persons" Multiplicity="1" />
-          <End Role="Persons1" Type="Self.Persons" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Persons">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Persons1">
-              <PropertyRef Name="Mother_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PersonPlace">
-          <End Role="Places" Type="Self.Places" Multiplicity="1" />
-          <End Role="Persons" Type="Self.Persons" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Places">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Persons">
-              <PropertyRef Name="BirthPlaceId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PlacePlace">
-          <End Role="Places" Type="Self.Places" Multiplicity="1" />
-          <End Role="Places1" Type="Self.Places" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Places">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Places1">
-              <PropertyRef Name="PlaceId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="GRAppStoreContainer">
-          <EntitySet Name="EventPersons" EntityType="Self.EventPersons" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Events" EntityType="Self.Events" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Persons" EntityType="Self.Persons" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Places" EntityType="Self.Places" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_EventPersons_Event" Association="Self.FK_EventPersons_Event">
-            <End Role="Events" EntitySet="Events" />
-            <End Role="EventPersons" EntitySet="EventPersons" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EventPersons_Person" Association="Self.FK_EventPersons_Person">
-            <End Role="Persons" EntitySet="Persons" />
-            <End Role="EventPersons" EntitySet="EventPersons" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EventPlace" Association="Self.FK_EventPlace">
-            <End Role="Places" EntitySet="Places" />
-            <End Role="Events" EntitySet="Events" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PersonDeathPlace" Association="Self.FK_PersonDeathPlace">
-            <End Role="Places" EntitySet="Places" />
-            <End Role="Persons" EntitySet="Persons" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PersonEvent" Association="Self.FK_PersonEvent">
-            <End Role="Persons" EntitySet="Persons" />
-            <End Role="Events" EntitySet="Events" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PersonFather" Association="Self.FK_PersonFather">
-            <End Role="Persons" EntitySet="Persons" />
-            <End Role="Persons1" EntitySet="Persons" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PersonMother" Association="Self.FK_PersonMother">
-            <End Role="Persons" EntitySet="Persons" />
-            <End Role="Persons1" EntitySet="Persons" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PersonPlace" Association="Self.FK_PersonPlace">
-            <End Role="Places" EntitySet="Places" />
-            <End Role="Persons" EntitySet="Persons" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PlacePlace" Association="Self.FK_PlacePlace">
-            <End Role="Places" EntitySet="Places" />
-            <End Role="Places1" EntitySet="Places" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema></edmx:StorageModels>
+    <Schema Namespace="GRApp.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="GRAppStoreContainer">
+    <EntitySet Name="Persons" EntityType="GRApp.Store.Persons" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Events" EntityType="GRApp.Store.Events" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Places" EntityType="GRApp.Store.Places" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EventPerson" EntityType="GRApp.Store.EventPerson" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="PersonEvent" Association="GRApp.Store.PersonEvent">
+      <End Role="Person" EntitySet="Persons" />
+      <End Role="Event" EntitySet="Events" />
+    </AssociationSet>
+    <AssociationSet Name="PersonMother" Association="GRApp.Store.PersonMother">
+      <End Role="Person" EntitySet="Persons" />
+      <End Role="Person1" EntitySet="Persons" />
+    </AssociationSet>
+    <AssociationSet Name="PersonFather" Association="GRApp.Store.PersonFather">
+      <End Role="Person" EntitySet="Persons" />
+      <End Role="Person1" EntitySet="Persons" />
+    </AssociationSet>
+    <AssociationSet Name="PersonBirthPlace" Association="GRApp.Store.PersonPlace">
+      <End Role="Person" EntitySet="Persons" />
+      <End Role="Place" EntitySet="Places" />
+    </AssociationSet>
+    <AssociationSet Name="PersonDeathPlace" Association="GRApp.Store.PersonDeathPlace">
+      <End Role="Person" EntitySet="Persons" />
+      <End Role="Place" EntitySet="Places" />
+    </AssociationSet>
+    <AssociationSet Name="PlacePlace" Association="GRApp.Store.PlacePlace">
+      <End Role="Place" EntitySet="Places" />
+      <End Role="Place1" EntitySet="Places" />
+    </AssociationSet>
+    <AssociationSet Name="EventPlace" Association="GRApp.Store.EventPlace">
+      <End Role="Event" EntitySet="Events" />
+      <End Role="Place" EntitySet="Places" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EventPerson_Event" Association="GRApp.Store.FK_EventPerson_Event">
+      <End Role="Event" EntitySet="Events" />
+      <End Role="EventPerson" EntitySet="EventPerson" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EventPerson_Person" Association="GRApp.Store.FK_EventPerson_Person">
+      <End Role="Person" EntitySet="Persons" />
+      <End Role="EventPerson" EntitySet="EventPerson" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Persons">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Surname" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BirthDate" Type="datetime" Nullable="false" />
+    <Property Name="DeathDate" Type="datetime" Nullable="false" />
+    <Property Name="BirthPlaceId" Type="int" Nullable="false" />
+    <Property Name="DeathPlaceId" Type="int" Nullable="false" />
+    <Property Name="Mother_Id" Type="int" Nullable="false" />
+    <Property Name="Father_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Events">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Type" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PersonId" Type="int" Nullable="false" />
+    <Property Name="Place_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Places">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Parent_Id" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="EventPerson">
+    <Key>
+      <PropertyRef Name="EventsAttended_Id" />
+      <PropertyRef Name="Attendees_Id" />
+    </Key>
+    <Property Name="EventsAttended_Id" Type="int" Nullable="false" />
+    <Property Name="Attendees_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="PersonEvent">
+    <End Role="Person" Type="GRApp.Store.Persons" Multiplicity="1" />
+    <End Role="Event" Type="GRApp.Store.Events" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Event">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PersonMother">
+    <End Role="Person" Type="GRApp.Store.Persons" Multiplicity="*" />
+    <End Role="Person1" Type="GRApp.Store.Persons" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Person1">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="Mother_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PersonFather">
+    <End Role="Person" Type="GRApp.Store.Persons" Multiplicity="*" />
+    <End Role="Person1" Type="GRApp.Store.Persons" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Person1">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="Father_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PersonPlace">
+    <End Role="Person" Type="GRApp.Store.Persons" Multiplicity="*" />
+    <End Role="Place" Type="GRApp.Store.Places" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Place">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="BirthPlaceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PersonDeathPlace">
+    <End Role="Person" Type="GRApp.Store.Persons" Multiplicity="*" />
+    <End Role="Place" Type="GRApp.Store.Places" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Place">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="DeathPlaceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PlacePlace">
+    <End Role="Place" Type="GRApp.Store.Places" Multiplicity="0..1" />
+    <End Role="Place1" Type="GRApp.Store.Places" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Place">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Place1">
+        <PropertyRef Name="Parent_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EventPlace">
+    <End Role="Event" Type="GRApp.Store.Events" Multiplicity="*" />
+    <End Role="Place" Type="GRApp.Store.Places" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Place">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Event">
+        <PropertyRef Name="Place_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EventPerson_Event">
+    <End Role="Event" Type="GRApp.Store.Events" Multiplicity="1" />
+    <End Role="EventPerson" Type="GRApp.Store.EventPerson" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Event">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EventPerson">
+        <PropertyRef Name="EventsAttended_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EventPerson_Person">
+    <End Role="EventPerson" Type="GRApp.Store.EventPerson" Multiplicity="*" />
+    <End Role="Person" Type="GRApp.Store.Persons" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EventPerson">
+        <PropertyRef Name="Attendees_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="GRApp" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
@@ -205,10 +205,6 @@
           <AssociationSet Name="PersonEvent" Association="GRApp.PersonEvent">
             <End Role="Person" EntitySet="Persons" />
             <End Role="Event" EntitySet="Events" />
-          </AssociationSet>
-          <AssociationSet Name="EventPersons" Association="GRApp.EventPersons">
-            <End Role="Event" EntitySet="Events" />
-            <End Role="Person" EntitySet="Persons" />
           </AssociationSet>
           <AssociationSet Name="PersonMother" Association="GRApp.PersonMother">
             <End Role="Person" EntitySet="Persons" />
@@ -234,6 +230,10 @@
             <End Role="Event" EntitySet="Events" />
             <End Role="Place" EntitySet="Places" />
           </AssociationSet>
+          <AssociationSet Name="EventPerson" Association="GRApp.EventPerson">
+            <End Role="Event" EntitySet="Events" />
+            <End Role="Person" EntitySet="Persons" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Person">
           <Key>
@@ -245,13 +245,13 @@
           <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="DeathDate" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="Events" Relationship="GRApp.PersonEvent" FromRole="Person" ToRole="Event" />
-          <NavigationProperty Name="EventsAttented" Relationship="GRApp.EventPersons" FromRole="Person" ToRole="Event" />
           <NavigationProperty Name="Mother" Relationship="GRApp.PersonMother" FromRole="Person" ToRole="Person1" />
           <NavigationProperty Name="Father" Relationship="GRApp.PersonFather" FromRole="Person" ToRole="Person1" />
           <NavigationProperty Name="BirthPlace" Relationship="GRApp.PersonPlace" FromRole="Person" ToRole="Place" />
           <Property Name="BirthPlaceId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="DeathPlace" Relationship="GRApp.PersonDeathPlace" FromRole="Person" ToRole="Place" />
           <Property Name="DeathPlaceId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EventsAttended" Relationship="GRApp.EventPerson" FromRole="Person" ToRole="Event" />
         </EntityType>
         <EntityType Name="Event">
           <Key>
@@ -261,8 +261,8 @@
           <Property Name="Type" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Person" Relationship="GRApp.PersonEvent" FromRole="Event" ToRole="Person" />
           <Property Name="PersonId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Attendees" Relationship="GRApp.EventPersons" FromRole="Event" ToRole="Person" />
           <NavigationProperty Name="Place" Relationship="GRApp.EventPlace" FromRole="Event" ToRole="Place" />
+          <NavigationProperty Name="Attendees" Relationship="GRApp.EventPerson" FromRole="Event" ToRole="Person" />
         </EntityType>
         <EntityType Name="Place">
           <Key>
@@ -272,8 +272,8 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Parent" Relationship="GRApp.PlacePlace" FromRole="Place" ToRole="Place1" />
           <NavigationProperty Name="SubRegions" Relationship="GRApp.PlacePlace" FromRole="Place1" ToRole="Place" />
-          <Property Name="PlaceId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Events" Relationship="GRApp.EventPlace" FromRole="Place" ToRole="Event" />
+          <Property Name="Parent_Id" Type="Int32" Nullable="true" />
         </EntityType>
         <Association Name="PersonEvent">
           <End Type="GRApp.Person" Role="Person" Multiplicity="1" />
@@ -286,10 +286,6 @@
               <PropertyRef Name="PersonId" />
             </Dependent>
           </ReferentialConstraint>
-        </Association>
-        <Association Name="EventPersons">
-          <End Type="GRApp.Event" Role="Event" Multiplicity="*" />
-          <End Type="GRApp.Person" Role="Person" Multiplicity="*" />
         </Association>
         <Association Name="PersonMother">
           <End Type="GRApp.Person" Role="Person" Multiplicity="1" />
@@ -324,20 +320,24 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="PlacePlace">
-          <End Type="GRApp.Place" Role="Place" Multiplicity="1" />
+          <End Type="GRApp.Place" Role="Place" Multiplicity="0..1" />
           <End Type="GRApp.Place" Role="Place1" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Place">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Place1">
-              <PropertyRef Name="PlaceId" />
+              <PropertyRef Name="Parent_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="EventPlace">
           <End Type="GRApp.Event" Role="Event" Multiplicity="*" />
           <End Type="GRApp.Place" Role="Place" Multiplicity="1" />
+        </Association>
+        <Association Name="EventPerson">
+          <End Type="GRApp.Event" Role="Event" Multiplicity="*" />
+          <End Type="GRApp.Person" Role="Person" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -372,18 +372,10 @@
         <MappingFragment StoreEntitySet="Places">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="PlaceId" ColumnName="PlaceId" />
+          <ScalarProperty Name="Parent_Id" ColumnName="Parent_Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="EventPersons" TypeName="GRApp.EventPersons" StoreEntitySet="EventPersons">
-      <EndProperty Name="Event">
-        <ScalarProperty Name="Id" ColumnName="EventsAttented_Id" />
-      </EndProperty>
-      <EndProperty Name="Person">
-        <ScalarProperty Name="Id" ColumnName="Attendees_Id" />
-      </EndProperty>
-    </AssociationSetMapping>
     <AssociationSetMapping Name="PersonMother" TypeName="GRApp.PersonMother" StoreEntitySet="Persons">
       <EndProperty Name="Person1">
         <ScalarProperty Name="Id" ColumnName="Mother_Id" />
@@ -406,6 +398,14 @@
       </EndProperty>
       <EndProperty Name="Event">
         <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="EventPerson" TypeName="GRApp.EventPerson" StoreEntitySet="EventPerson">
+      <EndProperty Name="Event">
+        <ScalarProperty Name="Id" ColumnName="EventsAttended_Id" />
+      </EndProperty>
+      <EndProperty Name="Person">
+        <ScalarProperty Name="Id" ColumnName="Attendees_Id" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>

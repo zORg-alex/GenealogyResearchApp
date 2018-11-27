@@ -18,7 +18,7 @@ namespace GRAppLib.DB
         public Person()
         {
             this.Events = new HashSet<Event>();
-            this.EventsAttented = new HashSet<Event>();
+            this.EventsAttended = new HashSet<Event>();
         }
     
         public int Id { get; set; }
@@ -31,11 +31,11 @@ namespace GRAppLib.DB
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Event> Events { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Event> EventsAttented { get; set; }
         public virtual Person Mother { get; set; }
         public virtual Person Father { get; set; }
         public virtual Place BirthPlace { get; set; }
         public virtual Place DeathPlace { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Event> EventsAttended { get; set; }
     }
 }

@@ -41,7 +41,6 @@ namespace GenealogyResearchApp.View {
                 Thread.Sleep(5);
                 if (mainViewModelReady) {
                     MainWindow.DataContext = MainViewModel;
-                    MainViewModelReady = true;
                     exit = true;
                 }
             }

@@ -6,16 +6,16 @@
     <edmx:Diagrams>
       <Diagram DiagramId="9753cf4cc24f4de089f8a745e92dce5b" Name="Diagram1" >
         <EntityTypeShape EntityType="GRApp.Person" Width="1.5" PointX="5.5" PointY="5.75" />
-        <EntityTypeShape EntityType="GRApp.Event" Width="1.5" PointX="8.5" PointY="2.625" />
+        <EntityTypeShape EntityType="GRApp.Event" Width="1.5" PointX="8.125" PointY="2.625" />
         <EntityTypeShape EntityType="GRApp.Place" Width="1.5" PointX="2.75" PointY="2.625" />
         <AssociationConnector Association="GRApp.PersonEvent" />
-        <AssociationConnector Association="GRApp.EventPersons" />
         <AssociationConnector Association="GRApp.PersonMother" />
         <AssociationConnector Association="GRApp.PersonFather" />
         <AssociationConnector Association="GRApp.PersonPlace" />
         <AssociationConnector Association="GRApp.PersonDeathPlace" />
         <AssociationConnector Association="GRApp.PlacePlace" />
         <AssociationConnector Association="GRApp.EventPlace" />
+        <AssociationConnector Association="GRApp.EventPerson" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
