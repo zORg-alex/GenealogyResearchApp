@@ -12,8 +12,7 @@
         ResizeMode="CanResizeWithGrip"
         Background="#FF223444" BorderBrush="{DynamicResource Pallete.Primary.Brighter}"
         BorderThickness="2" Foreground="{DynamicResource Pallete.Primary.Darkest}"
-        WindowStyle="None" Style="{DynamicResource EmptyWindowStyle}"
-        DataContextChanged="Window_DataContextChanged">
+        WindowStyle="None" Style="{DynamicResource EmptyWindowStyle}">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -28,6 +27,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid x:Name="Title" Background="{DynamicResource Pallete.Primary}"/>
-        <Frame x:Name="ViewFrame" DataContext="{Binding SelectedView}" Style="{DynamicResource FrameStyle}" Grid.Row="1"/>
+        <Frame x:Name="ViewFrame" DataContext="{Binding SelectedView}" Style="{DynamicResource FrameStyle}" Grid.Row="1"
+			   DataContextChanged="ViewFrame_DataContextChanged"/>
     </Grid>
 </Window>

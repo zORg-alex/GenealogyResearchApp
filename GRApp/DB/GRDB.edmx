@@ -242,8 +242,8 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Surname" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="DeathDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DeathDate" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Events" Relationship="GRApp.PersonEvent" FromRole="Person" ToRole="Event" />
           <NavigationProperty Name="Mother" Relationship="GRApp.PersonMother" FromRole="Person" ToRole="Person1" />
           <NavigationProperty Name="Father" Relationship="GRApp.PersonFather" FromRole="Person" ToRole="Person1" />

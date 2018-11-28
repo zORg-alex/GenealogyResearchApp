@@ -30,7 +30,7 @@ namespace GenealogyResearchApp.ViewModel {
 			set { selectedview = value; RaisePropertyChanged("SelectedView"); }
 		}
 
-		private List<View> views;
+		private List<View> views = new List<View>();
 		public List<View> Views {
 			get { return views; }
 			set { views = value; RaisePropertyChanged("Views"); }

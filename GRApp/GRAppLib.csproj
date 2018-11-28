@@ -112,7 +112,7 @@
       <DependentUpon>GRDB.edmx</DependentUpon>
     </Content>
     <Content Include="DB\GRDB.edmx.sql" />
-    <Content Include="DB\GRDB.mdf">
+    <Content Include="DB\GenealogyResearchAppDB.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="DB\GRDB.tt">
@@ -120,9 +120,9 @@
       <LastGenOutput>GRDB.cs</LastGenOutput>
       <DependentUpon>GRDB.edmx</DependentUpon>
     </Content>
-    <Content Include="DB\GRDB_log.ldf">
+    <Content Include="DB\GenealogyResearchAppDB_log.ldf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>GRDB.mdf</DependentUpon>
+      <DependentUpon>GenealogyResearchAppDB.mdf</DependentUpon>
     </Content>
   </ItemGroup>
   <ItemGroup>

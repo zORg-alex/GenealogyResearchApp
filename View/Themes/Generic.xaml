@@ -852,7 +852,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <LinearGradientBrush x:Key="NavigationWindowNavigationButtonFillDisabled" EndPoint="0.5,1.0" StartPoint="0.5,0.0">
+    <!--<LinearGradientBrush x:Key="NavigationWindowNavigationButtonFillDisabled" EndPoint="0.5,1.0" StartPoint="0.5,0.0">
         <LinearGradientBrush.GradientStops>
             <GradientStopCollection>
                 <GradientStop Color="#FFFFFF" Offset="0"/>
@@ -1056,7 +1056,7 @@
                 <Setter Property="IsEnabled" TargetName="NavMenu" Value="false"/>
             </MultiTrigger>
         </ControlTemplate.Triggers>
-    </ControlTemplate>
+    </ControlTemplate>-->
     
     <Style x:Key="FrameStyle" TargetType="{x:Type Frame}">
         <Setter Property="NavigationUIVisibility" Value="Hidden"/>

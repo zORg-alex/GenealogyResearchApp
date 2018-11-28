@@ -15,6 +15,7 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -27,7 +28,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -196,6 +196,10 @@
     <Folder Include="Convertors\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GRApp\GRAppLib.csproj">
+      <Project>{5323b70e-36c0-4de3-9237-2303b122c05e}</Project>
+      <Name>GRAppLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ViewModel\_ViewModel.csproj">
       <Project>{7e1ca84f-c35b-4a09-8ec6-b16ac4cb7cd0}</Project>
       <Name>_ViewModel</Name>
@@ -216,6 +220,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

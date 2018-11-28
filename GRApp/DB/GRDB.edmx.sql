@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/27/2018 16:08:16
+-- Date Created: 11/28/2018 14:57:45
 -- Generated from EDMX file: C:\Users\AUljanovs\Documents\GitHub\GenealogyResearchApp\GRApp\DB\GRDB.edmx
 -- --------------------------------------------------
 
@@ -17,37 +17,46 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_PersonEvent]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Events] DROP CONSTRAINT [FK_PersonEvent];
+IF OBJECT_ID(N'[dbo].[FK_EventPerson_Event]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[EventPerson] DROP CONSTRAINT [FK_EventPerson_Event];
 GO
-IF OBJECT_ID(N'[dbo].[FK_PersonMother]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Persons] DROP CONSTRAINT [FK_PersonMother];
+IF OBJECT_ID(N'[dbo].[FK_EventPerson_Person]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[EventPerson] DROP CONSTRAINT [FK_EventPerson_Person];
 GO
-IF OBJECT_ID(N'[dbo].[FK_PersonFather]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Persons] DROP CONSTRAINT [FK_PersonFather];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PersonPlace]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Persons] DROP CONSTRAINT [FK_PersonPlace];
+IF OBJECT_ID(N'[dbo].[FK_EventPlace]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Events] DROP CONSTRAINT [FK_EventPlace];
 GO
 IF OBJECT_ID(N'[dbo].[FK_PersonDeathPlace]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Persons] DROP CONSTRAINT [FK_PersonDeathPlace];
 GO
+IF OBJECT_ID(N'[dbo].[FK_PersonEvent]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Events] DROP CONSTRAINT [FK_PersonEvent];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PersonFather]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Persons] DROP CONSTRAINT [FK_PersonFather];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PersonMother]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Persons] DROP CONSTRAINT [FK_PersonMother];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PersonPlace]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Persons] DROP CONSTRAINT [FK_PersonPlace];
+GO
 IF OBJECT_ID(N'[dbo].[FK_PlacePlace]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Places] DROP CONSTRAINT [FK_PlacePlace];
-GO
-IF OBJECT_ID(N'[dbo].[FK_EventPlace]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Events] DROP CONSTRAINT [FK_EventPlace];
 GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[Persons]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Persons];
+IF OBJECT_ID(N'[dbo].[EventPerson]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[EventPerson];
 GO
 IF OBJECT_ID(N'[dbo].[Events]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Events];
+GO
+IF OBJECT_ID(N'[dbo].[Persons]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Persons];
 GO
 IF OBJECT_ID(N'[dbo].[Places]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Places];
