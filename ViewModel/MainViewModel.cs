@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using GRAppLib.DB;
 using zLib;
 
 namespace GenealogyResearchApp.ViewModel {
-    public class MainViewModel : Notifiable, IDialogHelper {
+    public class MainViewModel : ViewModelBase, IDialogHelper {
 
         Func<string, string, string, string> _openDialog = (type, filter, path) => { return ""; };
-        public Func<string, string, string, string> OpenDialog { get { return _openDialog; } set { _openDialog = value; } }
+		public Func<string, string, string, string> OpenDialog { get { return ViewModelBase._openDialog; } set { ViewModelBase._openDialog = value; } }
+		public Action<string, string, Action<DialogResult>, string, string, Func<object, bool>> OpenWindow { get { return ViewModelBase._openWindow; } set { ViewModelBase._openWindow = value; } }
+		public Action<string, object, string, Action<DialogResult>, Action<object>, string, string, Func<object, bool>> OpenWindowWithReturn { get { return ViewModelBase._openWindowWithReturn; } set { ViewModelBase._openWindowWithReturn = value; } }
 
 		GRDBCont db;
 

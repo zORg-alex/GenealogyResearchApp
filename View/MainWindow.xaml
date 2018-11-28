@@ -27,7 +27,6 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid x:Name="Title" Background="{DynamicResource Pallete.Primary}"/>
-        <Frame x:Name="ViewFrame" DataContext="{Binding SelectedView}" Style="{DynamicResource FrameStyle}" Grid.Row="1"
-			   DataContextChanged="ViewFrame_DataContextChanged"/>
+        <Frame x:Name="ViewFrame" DataContext="{Binding SelectedView}" Style="{DynamicResource FrameStyle}" Grid.Row="1"/>
     </Grid>
 </Window>

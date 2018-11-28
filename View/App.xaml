@@ -1,7 +1,7 @@
 ﻿<Application x:Class="GenealogyResearchApp.View.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:zWPF_StartupProject.View"
+             xmlns:local="clr-namespace:GenealogyResearchApp.View"
              xmlns:c="clr-namespace:GenealogyResearchApp.View.Controls"
              xmlns:p="clr-namespace:GenealogyResearchApp.View.Properties"
              xmlns:s="clr-namespace:zLib;assembly=zLib">

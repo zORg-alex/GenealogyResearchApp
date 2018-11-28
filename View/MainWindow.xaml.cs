@@ -9,6 +9,7 @@ using System;
 using System.Reflection;
 using System.Windows.Data;
 using System.Linq;
+using GenealogyResearchApp.ViewModel;
 
 namespace GenealogyResearchApp.View {
     /// <summary>
@@ -23,11 +24,20 @@ namespace GenealogyResearchApp.View {
 			var viewtypes = Assembly.GetAssembly(typeof(ViewModel.View)).GetTypes().Where(t => t.BaseType == typeof(ViewModel.View));
 			var s = new Style(typeof(Frame), (Style)FindResource(typeof(Frame))); //Frame style base on one declared in Generic.xaml that passes DataContext to page
 			foreach (var viewType in Assembly.GetAssembly(typeof(ViewModel.View)).GetTypes()) {
-				DataTrigger dtr = new DataTrigger() { Binding = new Binding("Type"), Value = viewType.Name };
-				dtr.Setters.Add(new Setter(Frame.SourceProperty, new Uri($"Resources/{viewType.Name.Replace("ViewModel", "View")}.xaml", UriKind.Relative)));
-				s.Triggers.Add(dtr);
+				if (viewType.Name.Length > 9 && viewType.Name.Substring(viewType.Name.Length - 9) == "ViewModel") {
+					DataTrigger dtr = new DataTrigger() { Binding = new Binding("Type"), Value = viewType.Name };
+					dtr.Setters.Add(new Setter(Frame.SourceProperty, new Uri($"Pages\\{viewType.Name.Replace("ViewModel", "View")}.xaml", UriKind.Relative)));
+					s.Triggers.Add(dtr);
+				}
 			}
 			ViewFrame.Style = s;
+
+			//Assign overlay control's (or other window's) ViewModel's OpenDialog
+			DataContextChanged += (dp, e) => {
+				(DataContext as MainViewModel).OpenDialog = DialogHelper.OpenDialog;
+				(DataContext as MainViewModel).OpenWindow = DialogHelper.OpenWindow;
+				(DataContext as MainViewModel).OpenWindowWithReturn = DialogHelper.OpenWindowWithReturn;
+			};
 
 			//this.Loaded += new RoutedEventHandler(win_Loaded);
 			this.SourceInitialized += new EventHandler(win_SourceInitialized);
@@ -62,16 +72,6 @@ namespace GenealogyResearchApp.View {
             Top = y;
         }
 		
-		private void ViewFrame_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e) {
-			var assembly = Assembly.GetAssembly(typeof(MainWindow));
-			var tn = e.NewValue.GetType().Name.Replace("Model", "");
-			var viewType = assembly.GetType(tn);
-			if (viewType != null) {
-				var view = Activator.CreateInstance(viewType);
-				ViewFrame.Navigate(view);
-			}
-		}
-
 		protected override void OnClosing(CancelEventArgs e) {
             //Save settings on closing window
             ViewerSettings.Default.WindowStartWidth = Width;
