@@ -3,13 +3,14 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:cc="clr-namespace:GenealogyResearchApp.View.CustomControls" 
       xmlns:local="clr-namespace:GenealogyResearchApp.View"
       xmlns:vm="clr-namespace:GenealogyResearchApp.ViewModel;assembly=ViewModel"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="450" d:DesignWidth="800" d:DataContext="{DynamicResource TestPersonViewModel}"
       Title="PersonView">
     <Page.Resources>
-        <vm:MainViewModel x:Key="MainViewModel"/>
+        <vm:TestPersonViewModel x:Key="TestPersonViewModel"/>
     </Page.Resources>
 
     <Grid Background="{DynamicResource Pallete.Primary.Brightest}">
@@ -17,8 +18,15 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
-        <ListView Background="{DynamicResource Pallete.Primary.Brighter}"
-                  ItemsSource="{Binding Persons}" SelectedItem="{Binding SelectedPerson}"/>
+        <Grid Background="{DynamicResource Pallete.Primary.Brighter}">
+            <ListView ItemsSource="{Binding Persons}" SelectedItem="{Binding SelectedPerson}" ItemContainerStyle="{DynamicResource ListViewItemStyle}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <cc:PersonShort/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
         <Grid Grid.Column="1"/>
     </Grid>
 </Page>

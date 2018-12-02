@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="GenealogyResearchApp.View.CustomControls.PersonShort"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:grl="clr-namespace:GRAppLib.DB;assembly=GRAppLib" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GenealogyResearchApp.View.CustomControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="63.676" d:DesignWidth="359.081" d:DataContext="{DynamicResource TestPerson}"
+             Background="{DynamicResource Pallete.Primary.Brighter}" BorderBrush="{DynamicResource Pallete.Primary.Brightest}" BorderThickness="1">
+    <UserControl.Resources>
+        <grl:Person x:Key="TestPerson" FirstName_="Alpha" MiddleName_="Beta" LastName_="Gamma"/>
+    </UserControl.Resources>
+    <Grid>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="5">
+            <TextBlock Text="{Binding LastName_, Mode=OneWay}" Margin="2"/>
+            <TextBlock Text="{Binding FirstName_, Mode=OneWay}" Margin="2"/>
+            <TextBlock Text="{Binding MiddleName_, Mode=OneWay}" Margin="2"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

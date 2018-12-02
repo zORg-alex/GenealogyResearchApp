@@ -18,11 +18,20 @@ namespace GenealogyResearchApp.ViewModel {
 		GRDBCont db;
 
 		public MainViewModel() {
+			Persons = new List<Person>();
+			Places = new List<Place>();
+
+			Views.Add(new TestPersonViewModel());
+			SelectedView = Views.FirstOrDefault();
+		}
+
+		public MainViewModel(bool execute) {
 			db = new GRDBCont();
 			Persons = db.Persons.ToList();
 			Places = db.Places.ToList();
 
 			Views.Add(new PersonViewModel());
+			SelectedView = Views.FirstOrDefault();
 		}
 
 		private View selectedview;

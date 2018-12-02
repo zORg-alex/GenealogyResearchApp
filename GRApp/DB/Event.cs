@@ -17,16 +17,17 @@ namespace GRAppLib.DB
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Event()
         {
-            this.Attendees = new HashSet<Person>();
+            this.Persons = new HashSet<Person>();
         }
     
         public int Id { get; set; }
         public string Type { get; set; }
         public int PersonId { get; set; }
+        public int Place_Id { get; set; }
     
-        public virtual Person Person { get; set; }
         public virtual Place Place { get; set; }
+        public virtual Person Person { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Person> Attendees { get; set; }
+        public virtual ICollection<Person> Persons { get; set; }
     }
 }

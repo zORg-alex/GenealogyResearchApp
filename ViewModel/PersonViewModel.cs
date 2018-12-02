@@ -8,6 +8,14 @@ using System.Threading.Tasks;
 namespace GenealogyResearchApp.ViewModel {
 	public class PersonViewModel : View {
 
+		GRDBCont db;
+
+		public PersonViewModel() {
+			db = new GRDBCont();
+			Persons = db.Persons.ToList();
+			SelectedPerson = persons.FirstOrDefault();
+		}
+
 		private List<Person> persons;
 		public List<Person> Persons {
 			get { return persons; }

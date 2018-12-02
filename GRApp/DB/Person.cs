@@ -22,20 +22,29 @@ namespace GRAppLib.DB
         }
     
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Surname { get; set; }
-        public System.DateTime BirthDate { get; set; }
-        public System.DateTime DeathDate { get; set; }
-        public int BirthPlaceId { get; set; }
-        public int DeathPlaceId { get; set; }
+        public string FirstnameRaw { get; set; }
+        public string MiddlenameRaw { get; set; }
+        public string LastnameRaw { get; set; }
+        public Nullable<int> FirstNameId { get; set; }
+        public Nullable<int> MiddleNameId { get; set; }
+        public Nullable<int> LastNameId { get; set; }
+        public Nullable<System.DateTime> BirthDate { get; set; }
+        public Nullable<System.DateTime> DeathDate { get; set; }
+        public Nullable<int> BirthPlaceId { get; set; }
+        public Nullable<int> DeathPlaceId { get; set; }
+        public Nullable<int> FatherId { get; set; }
+        public Nullable<int> MotherId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Event> Events { get; set; }
-        public virtual Person Mother { get; set; }
-        public virtual Person Father { get; set; }
-        public virtual Place BirthPlace { get; set; }
+        public virtual Name FirstName { get; set; }
+        public virtual Name LastName { get; set; }
+        public virtual Name MiddleName { get; set; }
         public virtual Place DeathPlace { get; set; }
+        public virtual Place BirthPlace { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Event> EventsAttended { get; set; }
+        public virtual Person Father { get; set; }
+        public virtual Person Mother { get; set; }
     }
 }

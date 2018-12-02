@@ -2,7 +2,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
-    xmlns:s="clr-namespace:zLib;assembly=zLib"
+    xmlns:z="clr-namespace:zLib;assembly=zLib"
     xmlns:e="clr-namespace:EffectLibrary;assembly=EffectLibrary"
     xmlns:c="clr-namespace:GenealogyResearchApp.View.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -36,6 +36,12 @@
     <SolidColorBrush x:Key="Pallete.Tretiary.Brighter" Color="#F6B49A"/>
     <SolidColorBrush x:Key="Pallete.Tretiary.Brightest" Color="#FFF0EB"/>
 
+    <SolidColorBrush x:Key="Pallete.Gray" Color="#6E6E6E"/>
+    <SolidColorBrush x:Key="Pallete.Gray.Darker" Color="#39393A"/>
+    <SolidColorBrush x:Key="Pallete.Gray.Darkest" Color="#121A21"/>
+    <SolidColorBrush x:Key="Pallete.Gray.Brighter" Color="#A6A6A6"/>
+    <SolidColorBrush x:Key="Pallete.Gray.Brightest" Color="#FFFFFF"/>
+    
     <Style x:Key="DefaultZButtonStyle" TargetType="{x:Type c:zButton}">
         <Setter Property="Highlight" Value="#88577697"/>
         <Setter Property="Pressed" Value="#88102E4F"/>
@@ -300,5 +306,56 @@
 		</Setter>
 	</Style>
 	<Style TargetType="{x:Type Frame}" BasedOn="{StaticResource DefaultFrameStyle}"/>
+    <SolidColorBrush x:Key="ListBox.Static.Background" Color="#FFFFFFFF"/>
+    <SolidColorBrush x:Key="ListBox.Static.Border" Color="#FFABADB3"/>
+    <SolidColorBrush x:Key="ListBox.Disabled.Background" Color="#FFFFFFFF"/>
+    <SolidColorBrush x:Key="ListBox.Disabled.Border" Color="#FFD9D9D9"/>
+    <Style x:Key="ListViewStyle" TargetType="{x:Type ListView}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Foreground" Value="{StaticResource Pallete.Primary.Darkest}"/>
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+        <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+        <Setter Property="Stylus.IsFlicksEnabled" Value="True"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListView}">
+                    <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                        <ScrollViewer Focusable="false" Padding="{TemplateBinding Padding}">
+                            <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                        </ScrollViewer>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Background" TargetName="Bd" Value="{StaticResource ListBox.Disabled.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource ListBox.Disabled.Border}"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsGrouping" Value="true"/>
+                                <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="{x:Type ListView}" BasedOn="{StaticResource ListViewStyle}"/>
+
+    <Style x:Key="ListViewItemStyle" TargetType="{x:Type ListViewItem}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListViewItem}">
+                    <Control/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
 </ResourceDictionary>

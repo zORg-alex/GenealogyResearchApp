@@ -30,7 +30,7 @@ namespace GenealogyResearchApp.View {
             MainWindow.Show();
 
             Thread w = new Thread(() => {
-                MainViewModel = new MainViewModel();
+                MainViewModel = new MainViewModel(true);
                 MainViewModelReady = true;
             });
 			w.Name = "MainViewModel Loader";

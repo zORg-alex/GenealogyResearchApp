@@ -84,6 +84,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GRDB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DB\Name.cs">
+      <DependentUpon>GRDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\NameGroup.cs">
+      <DependentUpon>GRDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="DB\Person.cs">
       <DependentUpon>GRDB.tt</DependentUpon>
     </Compile>

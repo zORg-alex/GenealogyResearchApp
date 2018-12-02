@@ -25,8 +25,10 @@ namespace GRAppLib.DB
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Person> Persons { get; set; }
         public virtual DbSet<Event> Events { get; set; }
+        public virtual DbSet<NameGroup> NameGroups { get; set; }
+        public virtual DbSet<Name> Names { get; set; }
+        public virtual DbSet<Person> Persons { get; set; }
         public virtual DbSet<Place> Places { get; set; }
     }
 }

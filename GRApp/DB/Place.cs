@@ -17,8 +17,10 @@ namespace GRAppLib.DB
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Place()
         {
-            this.Parent = new HashSet<Place>();
             this.Events = new HashSet<Event>();
+            this.PersonsDied = new HashSet<Person>();
+            this.PersonsBorn = new HashSet<Person>();
+            this.ChildPlaces = new HashSet<Place>();
         }
     
         public int Id { get; set; }
@@ -26,9 +28,13 @@ namespace GRAppLib.DB
         public Nullable<int> Parent_Id { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Place> Parent { get; set; }
-        public virtual Place SubRegions { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Event> Events { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Person> PersonsDied { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Person> PersonsBorn { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Place> ChildPlaces { get; set; }
+        public virtual Place ParentPlace { get; set; }
     }
 }
