@@ -306,56 +306,148 @@
 		</Setter>
 	</Style>
 	<Style TargetType="{x:Type Frame}" BasedOn="{StaticResource DefaultFrameStyle}"/>
-    <SolidColorBrush x:Key="ListBox.Static.Background" Color="#FFFFFFFF"/>
-    <SolidColorBrush x:Key="ListBox.Static.Border" Color="#FFABADB3"/>
-    <SolidColorBrush x:Key="ListBox.Disabled.Background" Color="#FFFFFFFF"/>
-    <SolidColorBrush x:Key="ListBox.Disabled.Border" Color="#FFD9D9D9"/>
-    <Style x:Key="ListViewStyle" TargetType="{x:Type ListView}">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Foreground" Value="{StaticResource Pallete.Primary.Darkest}"/>
-        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
-        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
-        <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
-        <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
-        <Setter Property="Stylus.IsFlicksEnabled" Value="True"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Padding" Value="0"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ListView}">
-                    <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
-                        <ScrollViewer Focusable="false" Padding="{TemplateBinding Padding}">
-                            <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                        </ScrollViewer>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Background" TargetName="Bd" Value="{StaticResource ListBox.Disabled.Background}"/>
-                            <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource ListBox.Disabled.Border}"/>
-                        </Trigger>
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="IsGrouping" Value="true"/>
-                                <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false"/>
-                            </MultiTrigger.Conditions>
-                            <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
-                        </MultiTrigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-    <Style TargetType="{x:Type ListView}" BasedOn="{StaticResource ListViewStyle}"/>
 
-    <Style x:Key="ListViewItemStyle" TargetType="{x:Type ListViewItem}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ListViewItem}">
-                    <Control/>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+	<Style x:Key="ListViewStyle" TargetType="{x:Type ListView}">
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="BorderThickness" Value="0"/>
+		<Setter Property="Foreground" Value="{StaticResource Pallete.Primary.Darkest}"/>
+		<Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+		<Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+		<Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+		<Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+		<Setter Property="Stylus.IsFlicksEnabled" Value="True"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+		<Setter Property="Padding" Value="0"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ListView}">
+					<Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+						<ScrollViewer Focusable="false" Padding="{TemplateBinding Padding}">
+							<ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+						</ScrollViewer>
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsEnabled" Value="false">
+							<Setter Property="Effect">
+								<Setter.Value>
+									<e:DesaturateEffect DesaturationFactor=".5"/>
+								</Setter.Value>
+							</Setter>
+						</Trigger>
+						<MultiTrigger>
+							<MultiTrigger.Conditions>
+								<Condition Property="IsGrouping" Value="true"/>
+								<Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false"/>
+							</MultiTrigger.Conditions>
+							<Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+						</MultiTrigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	<!--<Style TargetType="{x:Type ListView}" BasedOn="{StaticResource ListViewStyle}"/>-->
+		
+	<Style x:Key="ListBoxStyle" TargetType="{x:Type ListBox}">
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="BorderThickness" Value="0"/>
+		<Setter Property="Foreground" Value="{StaticResource Pallete.Primary.Darkest}"/>
+		<Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+		<Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+		<Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+		<Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+		<Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ListBox}">
+					<Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="1" SnapsToDevicePixels="true">
+						<ScrollViewer Focusable="false" Padding="{TemplateBinding Padding}">
+							<ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+						</ScrollViewer>
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsEnabled" Value="false">
+							<Setter Property="Effect">
+								<Setter.Value>
+									<e:DesaturateEffect DesaturationFactor=".5"/>
+								</Setter.Value>
+							</Setter>
+						</Trigger>
+						<MultiTrigger>
+							<MultiTrigger.Conditions>
+								<Condition Property="IsGrouping" Value="true"/>
+								<Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false"/>
+							</MultiTrigger.Conditions>
+							<Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+						</MultiTrigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	<Style TargetType="{x:Type ListBox}" BasedOn="{StaticResource ListBoxStyle}"/>
+
+	<Style x:Key="ListBoxItem" TargetType="{x:Type ListBoxItem}">
+		<Setter Property="SnapsToDevicePixels" Value="True"/>
+		<Setter Property="Padding" Value="10,2"/>
+		<Setter Property="Background" Value="{Binding Background, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, FallbackValue=Transparent}"/>
+		<Setter Property="BorderBrush" Value="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, FallbackValue=Transparent}"/>
+		<Setter Property="BorderThickness" Value="0,0,0,1"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ListBoxItem}">
+					<Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+						<Border x:Name="Bd" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true" MinHeight="40">
+							<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+						</Border>
+					</Border>
+					<ControlTemplate.Triggers>
+						<MultiTrigger>
+							<MultiTrigger.Conditions>
+								<Condition Property="IsMouseOver" Value="True"/>
+							</MultiTrigger.Conditions>
+							<Setter Property="Effect" TargetName="Bd">
+								<Setter.Value>
+									<e:OverlayEffect BlendSolidBrush="{Binding ConverterParameter=.4, Converter={StaticResource BrushOpacityConverter}, Mode=OneWay, Source={StaticResource Pallete.Primary.Brightest}}"/>
+								</Setter.Value>
+							</Setter>
+						</MultiTrigger>
+						<MultiTrigger>
+							<MultiTrigger.Conditions>
+								<Condition Property="Selector.IsSelectionActive" Value="False"/>
+								<Condition Property="IsSelected" Value="True"/>
+							</MultiTrigger.Conditions>
+							<Setter Property="Effect" TargetName="Bd">
+								<Setter.Value>
+									<e:OverlayEffect BlendSolidBrush="{Binding ConverterParameter=.5, Converter={StaticResource BrushOpacityConverter}, Mode=OneWay, Source={StaticResource Pallete.Tretiary.Brighter}}"/>
+								</Setter.Value>
+							</Setter>
+						</MultiTrigger>
+						<MultiTrigger>
+							<MultiTrigger.Conditions>
+								<Condition Property="Selector.IsSelectionActive" Value="True"/>
+								<Condition Property="IsSelected" Value="True"/>
+							</MultiTrigger.Conditions>
+							<Setter Property="Effect" TargetName="Bd">
+								<Setter.Value>
+									<e:OverlayEffect BlendSolidBrush="{Binding ConverterParameter=.7, Converter={StaticResource BrushOpacityConverter}, Mode=OneWay, Source={StaticResource Pallete.Tretiary.Brighter}}"/>
+								</Setter.Value>
+							</Setter>
+						</MultiTrigger>
+						<Trigger Property="IsEnabled" Value="False">
+							<Setter Property="Effect" TargetName="Bd">
+								<Setter.Value>
+									<e:DesaturateEffect DesaturationFactor=".25"/>
+								</Setter.Value>
+							</Setter>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}"/>
 
 </ResourceDictionary>

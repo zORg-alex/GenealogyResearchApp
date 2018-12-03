@@ -19,13 +19,13 @@
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <Grid Background="{DynamicResource Pallete.Primary.Brighter}">
-            <ListView ItemsSource="{Binding Persons}" SelectedItem="{Binding SelectedPerson}" ItemContainerStyle="{DynamicResource ListViewItemStyle}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <cc:PersonShort/>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+			<ListBox ItemsSource="{Binding Persons}" SelectedItem="{Binding SelectedPerson}" ItemContainerStyle="{DynamicResource ListBoxItemStyle}">
+				<ListBox.ItemTemplate>
+					<DataTemplate DataType="ListViewItem">
+						<cc:PersonShort/>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
         </Grid>
         <Grid Grid.Column="1"/>
     </Grid>
