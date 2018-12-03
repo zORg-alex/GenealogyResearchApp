@@ -5,11 +5,11 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="9753cf4cc24f4de089f8a745e92dce5b" Name="Diagram1" ZoomLevel="88" >
-        <EntityTypeShape EntityType="GRApp.Event" Width="1.5" PointX="14.125" PointY="1.625" />
+        <EntityTypeShape EntityType="GRApp.Event" Width="1.5" PointX="12.5" PointY="1.125" />
         <EntityTypeShape EntityType="GRApp.NameGroup" Width="1.5" PointX="4.875" PointY="3.125" />
         <EntityTypeShape EntityType="GRApp.Name" Width="1.5" PointX="7.125" PointY="2.875" />
         <EntityTypeShape EntityType="GRApp.Person" Width="1.5" PointX="9.375" PointY="1.125" />
-        <EntityTypeShape EntityType="GRApp.Place" Width="1.5" PointX="14.25" PointY="4.75" />
+        <EntityTypeShape EntityType="GRApp.Place" Width="1.5" PointX="12.5" PointY="4" />
         <AssociationConnector Association="GRApp.EventPlace" />
         <AssociationConnector Association="GRApp.PersonsEvent" />
         <AssociationConnector Association="GRApp.NameNameGroup" />

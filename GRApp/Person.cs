@@ -14,6 +14,20 @@ namespace GRAppLib.DB {
 			}
 		}
 
+		private Person spouse;
+		private bool spouseIsNull;
+		public Person Spouse { get {
+				if (spouseIsNull) return null;
+
+				Event evt = Events.FirstOrDefault(e => e.Type == "Marriage");
+				if (evt != null) spouse = evt.Attendees.FirstOrDefault();
+				evt = EventsAttended.FirstOrDefault(e => e.Type == "Marriage" && e.Attendees.FirstOrDefault().Id == Id);
+				if (evt != null) spouse = evt.Person;
+				else spouseIsNull = true;
+
+				return spouse;
+			}
+		}
 		//TODO replace with creating grouped names
 		public string FirstName_ { get { return FirstnameRaw; } set { FirstnameRaw = value; } }
 		public string MiddleName_ { get { return MiddlenameRaw; } set { MiddlenameRaw = value; } }
