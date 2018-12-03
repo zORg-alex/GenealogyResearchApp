@@ -9,24 +9,30 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800" d:DataContext="{DynamicResource TestPersonViewModel}"
       Title="PersonView">
-    <Page.Resources>
-        <vm:TestPersonViewModel x:Key="TestPersonViewModel"/>
-    </Page.Resources>
+	<Page.Resources>
+		<vm:TestPersonViewModel x:Key="TestPersonViewModel"/>
+	</Page.Resources>
 
-    <Grid Background="{DynamicResource Pallete.Primary.Brightest}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="2*"/>
-        </Grid.ColumnDefinitions>
-        <Grid Background="{DynamicResource Pallete.Primary.Brighter}">
+	<Grid Background="{DynamicResource Pallete.Primary.Brightest}">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="2*"/>
+		</Grid.ColumnDefinitions>
+		<Grid Background="{DynamicResource Pallete.Primary.Brighter}">
 			<ListBox ItemsSource="{Binding Persons}" SelectedItem="{Binding SelectedPerson}">
 				<ListBox.ItemTemplate>
-					<DataTemplate DataType="ListViewItem">
-						<cc:PersonShort/>
+					<DataTemplate>
+						<StackPanel Orientation="Horizontal">
+							<TextBlock Text="{Binding FirstName_}" Margin="2,5" Style="{StaticResource CollapsibleTextBlockStyle}"/>
+							<TextBlock Text="{Binding LastName_}" Margin="2,5" Style="{StaticResource CollapsibleTextBlockStyle}"/>
+							<TextBlock Text="{Binding MiddleName_}" Margin="2,5" Style="{StaticResource CollapsibleTextBlockStyle}"/>
+						</StackPanel>
 					</DataTemplate>
 				</ListBox.ItemTemplate>
 			</ListBox>
-        </Grid>
-        <Grid Grid.Column="1"/>
-    </Grid>
+		</Grid>
+		<Grid Grid.Column="1">
+
+		</Grid>
+	</Grid>
 </Page>

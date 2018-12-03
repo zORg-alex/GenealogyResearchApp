@@ -450,4 +450,26 @@
 
 	<Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}"/>
 
+	<Style x:Key="CollapsibleTextBoxStyle" TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+		<Style.Triggers>
+			<DataTrigger Binding="{Binding}" Value="{x:Null}">
+				<Setter Property="Visibility" Value="Collapsed"/>
+			</DataTrigger>
+			<DataTrigger Binding="{Binding}" Value="0">
+				<Setter Property="Visibility" Value="Collapsed"/>
+			</DataTrigger>
+		</Style.Triggers>
+	</Style>
+
+	<Style x:Key="CollapsibleTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+		<Style.Triggers>
+			<DataTrigger Binding="{Binding}" Value="{x:Null}">
+				<Setter Property="Visibility" Value="Collapsed"/>
+			</DataTrigger>
+			<DataTrigger Binding="{Binding}" Value="0">
+				<Setter Property="Visibility" Value="Collapsed"/>
+			</DataTrigger>
+		</Style.Triggers>
+	</Style>
+
 </ResourceDictionary>

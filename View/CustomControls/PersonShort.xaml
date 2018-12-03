@@ -7,7 +7,7 @@
              xmlns:local="clr-namespace:GenealogyResearchApp.View.CustomControls"
              mc:Ignorable="d" 
              d:DesignHeight="63.676" d:DesignWidth="359.081" d:DataContext="{DynamicResource TestPerson}"
-             Background="{DynamicResource Pallete.Primary.Brighter}" BorderBrush="{DynamicResource Pallete.Primary.Brightest}" BorderThickness="1">
+             Background="{DynamicResource Pallete.Primary.Brighter}">
     <UserControl.Resources>
         <grl:Person x:Key="TestPerson" FirstName_="Alpha" MiddleName_="Beta" LastName_="Gamma"/>
     </UserControl.Resources>
