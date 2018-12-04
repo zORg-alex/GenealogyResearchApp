@@ -15,10 +15,23 @@ namespace GenealogyResearchApp.View {
     /// Interaction logic for App.xaml
     /// </summary>
     /// 
-    public partial class App : Application {
-        public MainViewModel MainViewModel;
+    public partial class App : Application, INotifyPropertyChanged {
+		public event PropertyChangedEventHandler PropertyChanged;
+		protected void RaisePropertyChanged(string propertyName) {
+			// take a copy to prevent thread issues
+			PropertyChangedEventHandler handler = PropertyChanged;
+			if (handler != null) {
+				handler(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+
+		private MainViewModel mainViewModel;
+        public MainViewModel MainViewModel { get { return mainViewModel; } set { mainViewModel = value; RaisePropertyChanged("MainViewModel"); } }
+
         private bool mainViewModelReady;
-        public bool MainViewModelReady { get { return mainViewModelReady; } set { mainViewModelReady = value; } }
+
+
+		public bool MainViewModelReady { get { return mainViewModelReady; } set { mainViewModelReady = value; } }
 
         protected override void OnStartup(StartupEventArgs e) {
 
@@ -29,26 +42,36 @@ namespace GenealogyResearchApp.View {
             MainWindow.Resources = Resources;
             MainWindow.Show();
 
-            Thread w = new Thread(() => {
-                MainViewModel = new MainViewModel(true);
-                MainViewModelReady = true;
-            });
+			//InitAsync();
+			//var a = 0;
+			//a++;
+
+			Thread w = new Thread(() => {
+				MainViewModel = new MainViewModel(true);
+				MainViewModelReady = true;
+			});
 			w.Name = "MainViewModel Loader";
-            w.Start();
+			w.Start();
 
-            bool exit = false;
-            while (!exit) {
-                Thread.Sleep(5);
-                if (mainViewModelReady) {
-                    MainWindow.DataContext = MainViewModel;
-                    exit = true;
-                }
-            }
+			bool exit = false;
+			while (!exit) {
+				Thread.Sleep(5);
+				if (mainViewModelReady) {
+					MainWindow.DataContext = MainViewModel;
+					exit = true;
+				}
+			}
 
-        }
+		}
+
+		async public void InitAsync() {
+			var t = new Task<MainViewModel>(() => new MainViewModel(true));
+			MainViewModel = await t;
+			MainWindow.DataContext = MainViewModel;
+		}
 
         protected override void OnExit(ExitEventArgs e) {
-            //Save things
+			if (MainViewModel != null) MainViewModel.Save();
             base.OnExit(e);
         }
     }

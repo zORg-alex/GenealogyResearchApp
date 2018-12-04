@@ -30,7 +30,7 @@ namespace GenealogyResearchApp.ViewModel {
 			Persons = db.Persons.ToList();
 			Places = db.Places.ToList();
 
-			Views.Add(new PersonViewModel());
+			Views.Add(new PersonViewModel(db));
 			SelectedView = Views.FirstOrDefault();
 		}
 
@@ -40,6 +40,10 @@ namespace GenealogyResearchApp.ViewModel {
 				if (selectedview == null) selectedview = Views.FirstOrDefault();
 				return selectedview; }
 			set { selectedview = value; RaisePropertyChanged("SelectedView"); }
+		}
+
+		public void Save() {
+			if (db != null) db.SaveChanges();
 		}
 
 		private List<View> views = new List<View>();

@@ -26,7 +26,7 @@ namespace GenealogyResearchApp.View {
 			foreach (var viewType in Assembly.GetAssembly(typeof(ViewModel.View)).GetTypes()) {
 				if (viewType.Name.Length > 9 && viewType.Name.Substring(viewType.Name.Length - 9) == "ViewModel") {
 					DataTrigger dtr = new DataTrigger() { Binding = new Binding("Type"), Value = viewType.Name };
-					dtr.Setters.Add(new Setter(Frame.SourceProperty, new Uri($"Pages\\{viewType.Name.Replace("ViewModel", "View")}.xaml", UriKind.Relative)));
+					dtr.Setters.Add(new Setter(Frame.SourceProperty, new Uri($"Pages\\{viewType.Name.Replace("ViewModel", "View").Replace("Test", "")}.xaml", UriKind.Relative)));
 					s.Triggers.Add(dtr);
 				}
 			}

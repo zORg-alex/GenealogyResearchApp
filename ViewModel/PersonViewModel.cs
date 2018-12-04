@@ -9,10 +9,11 @@ namespace GenealogyResearchApp.ViewModel {
 	public class PersonViewModel : View {
 
 		GRDBCont db;
-
-		public PersonViewModel() {
-			db = new GRDBCont();
+		public PersonViewModel() { }
+		public PersonViewModel(GRDBCont DB) {
+			db = DB;
 			Persons = db.Persons.ToList();
+			Places = db.Places.ToList();
 			SelectedPerson = persons.FirstOrDefault();
 		}
 
@@ -28,6 +29,8 @@ namespace GenealogyResearchApp.ViewModel {
 			set { selectedPerson = value; RaisePropertyChanged("SelectedPerson"); }
 		}
 
+		private List<Place> places;
+		public List<Place> Places { get { return places; } set { places = value; RaisePropertyChanged("Places"); } }
 		
 	}
 }

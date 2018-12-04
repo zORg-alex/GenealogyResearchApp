@@ -6,5 +6,4 @@
         xmlns:cc="clr-namespace:GenealogyResearchApp.View.CustomControls"
         mc:Ignorable="d"
         Title="CreatePersonSimpleEditor" Height="300" Width="308">
-	<cc:PersonSimpleEditor/>
 </Window>
