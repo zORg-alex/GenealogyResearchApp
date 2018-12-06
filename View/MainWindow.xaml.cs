@@ -10,6 +10,7 @@ using System.Reflection;
 using System.Windows.Data;
 using System.Linq;
 using GenealogyResearchApp.ViewModel;
+using System.Windows.Media;
 
 namespace GenealogyResearchApp.View {
     /// <summary>
@@ -81,19 +82,57 @@ namespace GenealogyResearchApp.View {
             ViewerSettings.Default.Save();
             base.OnClosing(e);
         }
-        
-        void win_SourceInitialized(object sender, EventArgs e) {
+
+		private const int WM_SYSCOMMAND = 0X112;
+		private WinInterop.HwndSource hwndSource;
+		enum SWP : uint {
+			NOSIZE = 0x0001,
+			NOMOVE = 0x0002,
+			NOZORDER = 0x0004,
+			NOREDRAW = 0x0008,
+			NOACTIVATE = 0x0010,
+			FRAMECHANGED = 0x0020,
+			SHOWWINDOW = 0x0040,
+			HIDEWINDOW = 0x0080,
+			NOCOPYBITS = 0x0100,
+			NOOWNERZORDER = 0x0200,
+			NOSENDCHANGING = 0x0400,
+		}
+		void win_SourceInitialized(object sender, EventArgs e) {
             System.IntPtr handle = (new WinInterop.WindowInteropHelper(this)).Handle;
             WinInterop.HwndSource.FromHwnd(handle).AddHook(new WinInterop.HwndSourceHook(WindowProc));
-        }
+			hwndSource = PresentationSource.FromVisual((Visual)sender) as WinInterop.HwndSource;
+		}
 
-        private static System.IntPtr WindowProc(System.IntPtr hwnd, int msg, System.IntPtr wParam, System.IntPtr lParam, ref bool handled) {
+        private System.IntPtr WindowProc(System.IntPtr hwnd, int msg, System.IntPtr wParam, System.IntPtr lParam, ref bool handled) {
             switch (msg) {
                 case 0x0024:
                     WmGetMinMaxInfo(hwnd, lParam);
                     handled = true;
                     break;
-            }
+				case 0x0046: {
+						WINDOWPOS pos = (WINDOWPOS)Marshal.PtrToStructure(lParam, typeof(WINDOWPOS));
+						if ((pos.flags & (int)(SWP.NOMOVE)) != 0) {
+							return IntPtr.Zero;
+						}
+
+						Window wnd = (Window)WinInterop.HwndSource.FromHwnd(hwnd).RootVisual;
+						if (wnd == null) {
+							return IntPtr.Zero;
+						}
+
+						bool changedPos = false;
+						if (pos.cx < MinWidth) { pos.cx = (int)MinWidth; changedPos = true; }
+						if (pos.cy < MinHeight) { pos.cy = (int)MinHeight; changedPos = true; }
+						if (!changedPos) {
+							return IntPtr.Zero;
+						}
+
+						Marshal.StructureToPtr(pos, lParam, true);
+						handled = true;
+						break;
+					}
+			}
 
             return (System.IntPtr)0;
         }
@@ -127,18 +166,8 @@ namespace GenealogyResearchApp.View {
         /// </summary>
         [StructLayout(LayoutKind.Sequential)]
         public struct POINT {
-            /// <summary>
-            /// x coordinate of point.
-            /// </summary>
             public int x;
-            /// <summary>
-            /// y coordinate of point.
-            /// </summary>
             public int y;
-
-            /// <summary>
-            /// Construct a point of coordinates (x,y).
-            /// </summary>
             public POINT(int x, int y) {
                 this.x = x;
                 this.y = y;
@@ -154,58 +183,30 @@ namespace GenealogyResearchApp.View {
             public POINT ptMaxTrackSize;
         };
 
-        //void win_Loaded(object sender, RoutedEventArgs e) {
-        //    this.WindowState = WindowState.Maximized;
-        //}
-
-
-        /// <summary>
-        /// </summary>
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
-        public class MONITORINFO {
-            /// <summary>
-            /// </summary>            
-            public int cbSize = Marshal.SizeOf(typeof(MONITORINFO));
-
-            /// <summary>
-            /// </summary>            
+        public class MONITORINFO {         
+            public int cbSize = Marshal.SizeOf(typeof(MONITORINFO));         
             public RECT rcMonitor = new RECT();
-
-            /// <summary>
-            /// </summary>            
-            public RECT rcWork = new RECT();
-
-            /// <summary>
-            /// </summary>            
+            public RECT rcWork = new RECT();   
             public int dwFlags = 0;
         }
-
-
-        /// <summary> Win32 </summary>
+		
         [StructLayout(LayoutKind.Sequential, Pack = 0)]
         public struct RECT {
-            /// <summary> Win32 </summary>
             public int left;
-            /// <summary> Win32 </summary>
             public int top;
-            /// <summary> Win32 </summary>
             public int right;
-            /// <summary> Win32 </summary>
             public int bottom;
-
-            /// <summary> Win32 </summary>
+			
             public static readonly RECT Empty = new RECT();
-
-            /// <summary> Win32 </summary>
+			
             public int Width {
                 get { return Math.Abs(right - left); }  // Abs needed for BIDI OS
             }
-            /// <summary> Win32 </summary>
             public int Height {
                 get { return bottom - top; }
             }
-
-            /// <summary> Win32 </summary>
+			
             public RECT(int left, int top, int right, int bottom) {
                 this.left = left;
                 this.top = top;
@@ -267,6 +268,31 @@ namespace GenealogyResearchApp.View {
         /// 
         /// </summary>
         [DllImport("User32")]
-        internal static extern IntPtr MonitorFromWindow(IntPtr handle, int flags);
-    }
+        internal static extern IntPtr MonitorFromWindow(IntPtr handle, int flags);[StructLayout(LayoutKind.Sequential)]
+
+		internal struct WINDOWPOS {
+			public IntPtr hwnd;
+			public IntPtr hwndInsertAfter;
+			public int x;
+			public int y;
+			public int cx;
+			public int cy;
+			public int flags;
+		}
+		public enum ResizeDirection {
+			Left = 1,
+			Right = 2,
+			Top = 3,
+			TopLeft = 4,
+			TopRight = 5,
+			Bottom = 6,
+			BottomLeft = 7,
+			BottomRight = 8,
+		}
+		[DllImport("user32", CharSet = CharSet.Auto)]
+		private static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+		private void ResizeWindow(ResizeDirection direction) {
+			SendMessage(hwndSource.Handle, WM_SYSCOMMAND, (IntPtr)(61440 + direction), IntPtr.Zero);
+		}
+	}
 }

@@ -5,12 +5,14 @@
     xmlns:z="clr-namespace:zLib;assembly=zLib"
     xmlns:e="clr-namespace:EffectLibrary;assembly=EffectLibrary"
     xmlns:c="clr-namespace:GenealogyResearchApp.View.Controls"
+    xmlns:cnv="clr-namespace:GenealogyResearchApp.View.Convertors"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" mc:Ignorable="d">
 
-    <BooleanToVisibilityConverter x:Key="bool2VisibilityConverter" />
+    <BooleanToVisibilityConverter x:Key="bool2VisibilityConverter"/>
+	<cnv:BrushOpacityConverter x:Key="BrushOpacityConverter"/>
 
-    <!-- http://paletton.com/#uid=c3x0I1b0f0klllz2zTZc3uWuFcbTj2v -->
+	<!-- http://paletton.com/#uid=c3x0I1b0f0klllz2zTZc3uWuFcbTj2v -->
 
     <SolidColorBrush x:Key="Pallete.Primary" Color="#2A516E"/>
     <SolidColorBrush x:Key="Pallete.Primary.Darker" Color="#07263E"/>

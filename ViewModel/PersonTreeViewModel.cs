@@ -8,12 +8,13 @@ using GRAppLib.DB;
 using zLib;
 
 namespace GenealogyResearchApp.ViewModel {
-	public class PersonTreeViewModel : Notifiable{
+	public class PersonTreeViewModel : View{
 		private GRDBCont db;
+
 		public PersonTreeViewModel() {
 			RootPair = new PersonPairNode() {
 				X = 50,
-				Y = 150,
+				Y = 100,
 				Male = new GRAppLib.DB.Person() { FirstName_ = "Alpha", BirthDate = DateTime.Now},
 				Female = new GRAppLib.DB.Person() { FirstName_ = "Beta", BirthDate = DateTime.Now}
 			};
@@ -21,7 +22,14 @@ namespace GenealogyResearchApp.ViewModel {
 
 		public PersonTreeViewModel(GRDBCont DB) {
 			db = DB;
-			
+			var l = db.Persons.ToList();
+			var r = db.Persons.FirstOrDefault(p => p.Father != null && p.Mother != null);
+			RootPair = new PersonPairNode() {
+				X = 50,
+				Y = 100,
+				Male = (r.Gender == 0) ? r : null,
+				Female = (r.Gender == 1) ? r : null
+			};
 		}
 		
 		private PersonPairNode rootPair;
@@ -30,16 +38,11 @@ namespace GenealogyResearchApp.ViewModel {
 				Pairs.Clear();
 				rootPair = value;
 				Pairs.Add(RootPair);
-				RootPair.ExpandBranch = new UVMCommand(p=> {
-					if(RootPair.Male != null) {
-						Pairs.Add(new PersonPairNode() {
-							Male = 
-						})
-					}
-				});
+				InitPair(RootPair);
 				RaisePropertyChanged("RootPair");
 			}
 		}
+		
 		void InitPair(PersonPairNode pp) {
 			pp.ExpandBranch = new UVMCommand(p => {
 				if (pp.Male != null) {
@@ -65,7 +68,7 @@ namespace GenealogyResearchApp.ViewModel {
 			});
 		}
 
-		private List<PersonPairNode> pairs;
+		private List<PersonPairNode> pairs = new List<PersonPairNode>();
 		public List<PersonPairNode> Pairs { get { return pairs; } set { pairs = value; RaisePropertyChanged("Pairs"); } }
 	}
 }

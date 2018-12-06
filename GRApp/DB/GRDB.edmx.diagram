@@ -22,6 +22,7 @@
         <AssociationConnector Association="GRApp.EventPersonAttended" />
         <AssociationConnector Association="GRApp.PersonFather" />
         <AssociationConnector Association="GRApp.PersonMother" />
+        <AssociationConnector Association="GRApp.FK_PersonFather" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

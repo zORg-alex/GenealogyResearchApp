@@ -116,6 +116,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Convertors\BooleanNegationConverter.cs" />
+    <Compile Include="Convertors\BooleanToVisibilityConvertor.cs" />
+    <Compile Include="Convertors\BrushOpacityConverter.cs" />
+    <Compile Include="Convertors\ColorOpacityConverter.cs" />
+    <Compile Include="Convertors\IntToBoolConverter.cs" />
+    <Compile Include="Convertors\ObjectToTypeConverter .cs" />
+    <Compile Include="Convertors\PathToDrawingBrushConverter.cs" />
+    <Compile Include="Convertors\TextToColorConvertor.cs" />
     <Compile Include="CreatePersonSimpleEditor.xaml.cs">
       <DependentUpon>CreatePersonSimpleEditor.xaml</DependentUpon>
     </Compile>
@@ -213,9 +221,7 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Convertors\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\GRApp\GRAppLib.csproj">
       <Project>{5323b70e-36c0-4de3-9237-2303b122c05e}</Project>

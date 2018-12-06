@@ -3,14 +3,20 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:GenealogyResearchApp.View.Pages"
+      xmlns:e="clr-namespace:EffectLibrary;assembly=EffectLibrary" 
+      xmlns:vm="clr-namespace:GenealogyResearchApp.ViewModel;assembly=ViewModel" 
+      xmlns:cc="clr-namespace:GenealogyResearchApp.View.CustomControls"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="300" d:DesignWidth="300" d:DataContext="{DynamicResource PersonTreeViewModel}"
       Title="PersonTreeView">
-
-	<Grid Background="{DynamicResource Pallete.Gray.Darker}">
-		<!--<Image Source="..."/>-->
-		<ItemsControl ItemsSource="{Binding Points}">
+	<Page.Resources>
+		<vm:PersonTreeViewModel x:Key="PersonTreeViewModel"/>
+	</Page.Resources>
+	<ScrollViewer Background="{DynamicResource Pallete.Gray.Darker}">
+		<ItemsControl ItemsSource="{Binding Pairs}">
+			<ItemsControl.Effect>
+				<DropShadowEffect ShadowDepth="2" Opacity=".5"/>
+			</ItemsControl.Effect>
 			<ItemsControl.ItemsPanel>
 				<ItemsPanelTemplate>
 					<Canvas IsItemsHost="True"/>
@@ -24,9 +30,20 @@
 			</ItemsControl.ItemContainerStyle>
 			<ItemsControl.ItemTemplate>
 				<DataTemplate>
-					<Border  Width="150" Height="50" Background="{DynamicResource Pallete.Primary.Brightest}"/>
+					<Grid  Width="150" Height="100" Background="{DynamicResource Pallete.Primary.Brightest}">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition/>
+							<ColumnDefinition Width="Auto"/>
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition/>
+							<RowDefinition/>
+						</Grid.RowDefinitions>
+						<cc:PersonShort DataContext="{Binding Male}" Grid.Row="0"/>
+						<cc:PersonShort DataContext="{Binding Female}" Grid.Row="1"/>
+					</Grid>
 				</DataTemplate>
 			</ItemsControl.ItemTemplate>
 		</ItemsControl>
-	</Grid>
+	</ScrollViewer>
 </Page>

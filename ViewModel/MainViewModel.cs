@@ -30,7 +30,7 @@ namespace GenealogyResearchApp.ViewModel {
 			Persons = db.Persons.ToList();
 			Places = db.Places.ToList();
 
-			Views.Add(new PersonViewModel(db));
+			Views.Add(new PersonTreeViewModel(db));
 			SelectedView = Views.FirstOrDefault();
 		}
 
