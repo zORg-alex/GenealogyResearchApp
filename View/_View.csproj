@@ -127,6 +127,9 @@
     <Compile Include="CreatePersonSimpleEditor.xaml.cs">
       <DependentUpon>CreatePersonSimpleEditor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\PersonNode.xaml.cs">
+      <DependentUpon>PersonNode.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomControls\PersonShort.xaml.cs">
       <DependentUpon>PersonShort.xaml</DependentUpon>
     </Compile>
@@ -146,6 +149,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="CreatePersonSimpleEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomControls\PersonNode.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

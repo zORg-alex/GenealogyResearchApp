@@ -6,13 +6,15 @@
       xmlns:e="clr-namespace:EffectLibrary;assembly=EffectLibrary" 
       xmlns:vm="clr-namespace:GenealogyResearchApp.ViewModel;assembly=ViewModel" 
       xmlns:cc="clr-namespace:GenealogyResearchApp.View.CustomControls"
+      xmlns:c="clr-namespace:GenealogyResearchApp.View.Controls"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300" d:DataContext="{DynamicResource PersonTreeViewModel}"
       Title="PersonTreeView">
 	<Page.Resources>
 		<vm:PersonTreeViewModel x:Key="PersonTreeViewModel"/>
 	</Page.Resources>
-	<ScrollViewer Background="{DynamicResource Pallete.Gray.Darker}">
+	<ScrollViewer Background="{DynamicResource Pallete.Gray.Darker}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+
 		<ItemsControl ItemsSource="{Binding Pairs}">
 			<ItemsControl.Effect>
 				<DropShadowEffect ShadowDepth="2" Opacity=".5"/>
@@ -30,17 +32,17 @@
 			</ItemsControl.ItemContainerStyle>
 			<ItemsControl.ItemTemplate>
 				<DataTemplate>
-					<Grid  Width="150" Height="100" Background="{DynamicResource Pallete.Primary.Brightest}">
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition/>
-							<ColumnDefinition Width="Auto"/>
-						</Grid.ColumnDefinitions>
+					<Grid  Width="150" Height="100">
 						<Grid.RowDefinitions>
 							<RowDefinition/>
 							<RowDefinition/>
 						</Grid.RowDefinitions>
-						<cc:PersonShort DataContext="{Binding Male}" Grid.Row="0"/>
-						<cc:PersonShort DataContext="{Binding Female}" Grid.Row="1"/>
+						<Rectangle Fill="{DynamicResource Pallete.Primary.Brightest}" Grid.RowSpan="2"/>
+						<cc:PersonNode DataContext="{Binding Male}" Grid.Row="0"/>
+						<cc:PersonNode DataContext="{Binding Female}" Grid.Row="1"/>
+						<c:zButton Command="{Binding ExpandBranch}" Margin="0,0,-20,0" HorizontalAlignment="Right" Grid.RowSpan="2" Background="{x:Null}">
+							<Path Width="16" Height="32" Fill="{DynamicResource Pallete.Primary.Brighter}" Stretch="Fill" StrokeLineJoin="Round" Data="F1 M 0,0L 0,10.24L 5.12,5.12L 0,0 Z "/>
+						</c:zButton>
 					</Grid>
 				</DataTemplate>
 			</ItemsControl.ItemTemplate>

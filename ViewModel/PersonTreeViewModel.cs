@@ -15,9 +15,20 @@ namespace GenealogyResearchApp.ViewModel {
 			RootPair = new PersonPairNode() {
 				X = 50,
 				Y = 100,
-				Male = new GRAppLib.DB.Person() { FirstName_ = "Alpha", BirthDate = DateTime.Now},
+				Male = new GRAppLib.DB.Person() {
+					FirstName_ = "Alpha",
+					BirthDate = DateTime.Now,
+					Father = new Person() {
+						FirstName_ = "AlphaF"
+					},
+					Mother = new Person() {
+						FirstName_ = "AlphaM"
+					}
+				},
 				Female = new GRAppLib.DB.Person() { FirstName_ = "Beta", BirthDate = DateTime.Now}
 			};
+			Pairs.Add(RootPair);
+			RootPair.ExpandBranch.Execute(null);
 		}
 
 		public PersonTreeViewModel(GRDBCont DB) {
@@ -30,6 +41,7 @@ namespace GenealogyResearchApp.ViewModel {
 				Male = (r.Gender == 0) ? r : null,
 				Female = (r.Gender == 1) ? r : null
 			};
+			RootPair.ExpandBranch.Execute(null);
 		}
 		
 		private PersonPairNode rootPair;
@@ -48,7 +60,7 @@ namespace GenealogyResearchApp.ViewModel {
 				if (pp.Male != null) {
 					pp.MaleParentsPair = new PersonPairNode() {
 						X = pp.X + 200,
-						Y = pp.Y - 50,
+						Y = pp.Y - 100,
 						Male = pp.Male.Father,
 						Female = pp.Male.Mother
 					};
@@ -58,13 +70,14 @@ namespace GenealogyResearchApp.ViewModel {
 				if (pp.Female != null) {
 					pp.FemaleParentsPair = new PersonPairNode() {
 						X = pp.X + 200,
-						Y = pp.Y + 50,
+						Y = pp.Y + 100,
 						Male = pp.Female.Father,
 						Female = pp.Female.Mother
 					};
 					pairs.Add(pp.FemaleParentsPair);
 					InitPair(pp.FemaleParentsPair);
 				}
+				RaisePropertyChanged("Pairs");
 			});
 		}
 
