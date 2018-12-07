@@ -8,14 +8,13 @@
       xmlns:cc="clr-namespace:GenealogyResearchApp.View.CustomControls"
       xmlns:c="clr-namespace:GenealogyResearchApp.View.Controls"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300" d:DataContext="{DynamicResource PersonTreeViewModel}"
+      d:DesignHeight="324" d:DesignWidth="563" d:DataContext="{DynamicResource PersonTreeViewModel}"
       Title="PersonTreeView">
 	<Page.Resources>
 		<vm:PersonTreeViewModel x:Key="PersonTreeViewModel"/>
 	</Page.Resources>
 	<ScrollViewer Background="{DynamicResource Pallete.Gray.Darker}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
-
-		<ItemsControl ItemsSource="{Binding Pairs}">
+		<ItemsControl x:Name="PersonTreeCanvas" ItemsSource="{Binding Pairs}">
 			<ItemsControl.Effect>
 				<DropShadowEffect ShadowDepth="2" Opacity=".5"/>
 			</ItemsControl.Effect>
