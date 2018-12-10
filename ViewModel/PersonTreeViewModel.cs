@@ -8,7 +8,7 @@ using GRAppLib.DB;
 using zLib;
 
 namespace GenealogyResearchApp.ViewModel {
-	public class PersonTreeViewModel : View{
+	public class PersonTreeViewModel : ViewModelBase{
 		private GRDBCont db;
 
 		public PersonTreeViewModel() {

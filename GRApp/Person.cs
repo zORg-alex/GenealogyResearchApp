@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using zLib;
 
 namespace GRAppLib.DB {
-	public partial class Person {
+	public partial class Person : Notifiable {
 		public List<Person> Children {
 			get {
 				return new GRDBCont()
@@ -34,5 +35,9 @@ namespace GRAppLib.DB {
 		public string LastName_ { get { return LastnameRaw; } set { LastnameRaw = value; } }
 
 
+		private bool isNull;
+		public bool IsNull { get { return isNull; } set { isNull = value; RaisePropertyChanged("IsNull"); } }
+
+		public UVMCommand CreatePerson;
 	}
 }

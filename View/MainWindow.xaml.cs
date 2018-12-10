@@ -22,9 +22,9 @@ namespace GenealogyResearchApp.View {
             InitializeComponent();
 
 			//Dynamically add all ViewModels to the frame triggers *.xaml files should be named same as ViewModel, except it should be just View
-			var viewtypes = Assembly.GetAssembly(typeof(ViewModel.View)).GetTypes().Where(t => t.BaseType == typeof(ViewModel.View));
+			var viewtypes = Assembly.GetAssembly(typeof(ViewModel.ViewModelBase)).GetTypes().Where(t => t.BaseType == typeof(ViewModel.ViewModelBase));
 			var s = new Style(typeof(Frame), (Style)FindResource(typeof(Frame))); //Frame style base on one declared in Generic.xaml that passes DataContext to page
-			foreach (var viewType in Assembly.GetAssembly(typeof(ViewModel.View)).GetTypes()) {
+			foreach (var viewType in Assembly.GetAssembly(typeof(ViewModel.ViewModelBase)).GetTypes()) {
 				if (viewType.Name.Length > 9 && viewType.Name.Substring(viewType.Name.Length - 9) == "ViewModel") {
 					DataTrigger dtr = new DataTrigger() { Binding = new Binding("Type"), Value = viewType.Name };
 					dtr.Setters.Add(new Setter(Frame.SourceProperty, new Uri($"Pages\\{viewType.Name.Replace("ViewModel", "View").Replace("Test", "")}.xaml", UriKind.Relative)));
@@ -35,9 +35,9 @@ namespace GenealogyResearchApp.View {
 
 			//Assign overlay control's (or other window's) ViewModel's OpenDialog
 			DataContextChanged += (dp, e) => {
-				(DataContext as MainViewModel).OpenDialog = DialogHelper.OpenDialog;
-				(DataContext as MainViewModel).OpenWindow = DialogHelper.OpenWindow;
-				(DataContext as MainViewModel).OpenWindowWithReturn = DialogHelper.OpenWindowWithReturn;
+				(DataContext as IDialogHelper).OpenDialog = DialogHelper.OpenDialog;
+				(DataContext as IDialogHelper).OpenWindow = DialogHelper.OpenWindow;
+				(DataContext as IDialogHelper).OpenWindowWithReturn = DialogHelper.OpenWindowWithReturn;
 			};
 
 			//this.Loaded += new RoutedEventHandler(win_Loaded);

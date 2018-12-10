@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GenealogyResearchApp.ViewModel {
-	public class PersonViewModel : View {
+	public class PersonViewModel : ViewModelBase {
 
 		GRDBCont db;
 		public PersonViewModel() { }

@@ -96,8 +96,10 @@
     <Compile Include="DB\Place.cs">
       <DependentUpon>GRDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="GRDBCont.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ConnectionString.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -145,6 +147,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\zLib\zLib.csproj">
+      <Project>{E3ADE982-86BB-42EE-8FAE-2AA55A08F81C}</Project>
+      <Name>zLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

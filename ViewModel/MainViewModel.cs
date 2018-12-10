@@ -8,13 +8,11 @@ using GRAppLib.DB;
 using zLib;
 
 namespace GenealogyResearchApp.ViewModel {
-    public class MainViewModel : ViewModelBase, IDialogHelper {
+    public class MainViewModel : ViewModelBase {
 
-        Func<string, string, string, string> _openDialog = (type, filter, path) => { return ""; };
-		public Func<string, string, string, string> OpenDialog { get { return ViewModelBase._openDialog; } set { ViewModelBase._openDialog = value; } }
-		public Action<string, string, Action<DialogResult>, string, string, Func<object, bool>> OpenWindow { get { return ViewModelBase._openWindow; } set { ViewModelBase._openWindow = value; } }
-		public Action<string, object, string, Action<DialogResult>, Action<object>, string, string, Func<object, bool>> OpenWindowWithReturn { get { return ViewModelBase._openWindowWithReturn; } set { ViewModelBase._openWindowWithReturn = value; } }
-
+		string ConnectionStringBase = "metadata=res://*/DB.GRDB.csdl|res://*/DB.GRDB.ssdl|res://*/DB.GRDB.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=(LocalDB)\\MSSQLLocalDB;attachdbfilename={0};integrated security=True;connect timeout=30;MultipleActiveResultSets=True;App=EntityFramework&quot;";
+		string DefaultDBLocation = "|DataDirectory|\\DB\\GenealogyResearchAppDB.mdf";
+		string AlternativeDBLocation = "C:\\Users\\AUljanovs\\Documents\\GRDB\\GenealogyResearchAppDB.mdf";
 		GRDBCont db;
 
 		public MainViewModel() {
@@ -26,7 +24,7 @@ namespace GenealogyResearchApp.ViewModel {
 		}
 
 		public MainViewModel(bool execute) {
-			db = new GRDBCont();
+			db = new GRDBCont(AlternativeDBLocation);
 			Persons = db.Persons.ToList();
 			Places = db.Places.ToList();
 
@@ -34,8 +32,8 @@ namespace GenealogyResearchApp.ViewModel {
 			SelectedView = Views.FirstOrDefault();
 		}
 
-		private View selectedview;
-		public View SelectedView {
+		private ViewModelBase selectedview;
+		public ViewModelBase SelectedView {
 			get {
 				if (selectedview == null) selectedview = Views.FirstOrDefault();
 				return selectedview; }
@@ -46,8 +44,8 @@ namespace GenealogyResearchApp.ViewModel {
 			if (db != null) db.SaveChanges();
 		}
 
-		private List<View> views = new List<View>();
-		public List<View> Views {
+		private List<ViewModelBase> views = new List<ViewModelBase>();
+		public List<ViewModelBase> Views {
 			get { return views; }
 			set { views = value; RaisePropertyChanged("Views"); }
 		}
