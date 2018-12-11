@@ -38,6 +38,15 @@ namespace GRAppLib.DB {
 		private bool isNull;
 		public bool IsNull { get { return isNull; } set { isNull = value; RaisePropertyChanged("IsNull"); } }
 
+		public bool GenderLocked { get; set; }
+
 		public UVMCommand CreatePerson;
+
+		public void SetNull(UVMCommand CreatePersonCommand) {
+			isNull = true;
+			CreatePerson = CreatePersonCommand;
+		}
+
+		public Gender Gender_ { get { return (Gender)this.Gender; } set { Gender = (int)value; } }
 	}
 }

@@ -56,7 +56,7 @@ namespace GenealogyResearchApp.ViewModel {
 		}
 		
 		void InitPair(PersonPairNode pp) {
-			pp.ExpandBranch = new UVMCommand(p => {
+			pp.ExpandBranch = new UVMCommand(par => {
 				if (pp.Male != null) {
 					pp.MaleParentsPair = new PersonPairNode() {
 						X = pp.X + 200,
@@ -66,6 +66,9 @@ namespace GenealogyResearchApp.ViewModel {
 					};
 					Pairs.Add(pp.MaleParentsPair);
 					InitPair(pp.MaleParentsPair);
+				} else {
+					var person = CreatePersonDialogAsync(0);
+					pp.Male = (Person)person;
 				}
 				if (pp.Female != null) {
 					pp.FemaleParentsPair = new PersonPairNode() {
@@ -79,6 +82,23 @@ namespace GenealogyResearchApp.ViewModel {
 				}
 				RaisePropertyChanged("Pairs");
 			});
+		}
+
+		private object CreatePersonDialogAsync(Gender gender) {
+			var tdb = new GRDBCont(MainViewModel.CurrentConnectionDBLocation);
+			Person person = new Person();
+			person.Gender_ = gender;
+			person.GenderLocked = true;
+			person.SetNull(new UVMCommand(p => {
+				OpenWindowWithObject("CreatePersonSimpleEditor", "MainWindow_", r => {
+					if (r == System.Windows.Forms.DialogResult.OK) {
+						tdb.Persons.Add(person);
+						tdb.SaveChanges();
+						MainViewModel.RequestUpdate(UpdateTarget.Persons);
+					}
+				}, person, null);
+			}, p => person.IsNull));
+			return person;
 		}
 
 		private List<PersonPairNode> pairs = new List<PersonPairNode>();

@@ -9,10 +9,12 @@ using zLib;
 
 namespace GenealogyResearchApp.ViewModel {
     public class MainViewModel : ViewModelBase {
+		public static MainViewModel Instance { get; private set; }
 
 		string ConnectionStringBase = "metadata=res://*/DB.GRDB.csdl|res://*/DB.GRDB.ssdl|res://*/DB.GRDB.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=(LocalDB)\\MSSQLLocalDB;attachdbfilename={0};integrated security=True;connect timeout=30;MultipleActiveResultSets=True;App=EntityFramework&quot;";
 		string DefaultDBLocation = "|DataDirectory|\\DB\\GenealogyResearchAppDB.mdf";
 		string AlternativeDBLocation = "C:\\Users\\AUljanovs\\Documents\\GRDB\\GenealogyResearchAppDB.mdf";
+		public static string CurrentConnectionDBLocation;
 		GRDBCont db;
 
 		public MainViewModel() {
@@ -24,7 +26,10 @@ namespace GenealogyResearchApp.ViewModel {
 		}
 
 		public MainViewModel(bool execute) {
+			Instance = this;
 			db = new GRDBCont(AlternativeDBLocation);
+			CurrentConnectionDBLocation = AlternativeDBLocation;
+
 			Persons = db.Persons.ToList();
 			Places = db.Places.ToList();
 
@@ -62,5 +67,10 @@ namespace GenealogyResearchApp.ViewModel {
 			set { places = value; RaisePropertyChanged("Places"); }
 		}
 
+		internal static void RequestUpdate(UpdateTarget Target) {
+			foreach (var v in Instance.Views) {
+				v.Update(Target);
+			}
+		}
 	}
 }

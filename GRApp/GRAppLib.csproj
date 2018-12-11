@@ -96,6 +96,7 @@
     <Compile Include="DB\Place.cs">
       <DependentUpon>GRDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Gender.cs" />
     <Compile Include="GRDBCont.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

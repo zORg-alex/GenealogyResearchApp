@@ -21,5 +21,9 @@ namespace GenealogyResearchApp.ViewModel {
 		public Action<string, string, Action<DialogResult>, object, Func<object, bool>> OpenWindowWithObject { get { return _openWindowWithObject; } set { _openWindowWithObject = value; } }
 		public Action<string, object, string, Action<DialogResult>, Action<object>, string, string, Func<object, bool>> OpenWindowWithReturn { get { return _openWindowWithReturn; } set { _openWindowWithReturn = value; } }
 
+		public void Update(UpdateTarget Target) {
+
+		}
+
 	}
 }
