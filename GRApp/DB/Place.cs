@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GRAppLib.DB
+namespace GenealogyResearchApp.GRAppLib.DB
 {
     using System;
     using System.Collections.Generic;

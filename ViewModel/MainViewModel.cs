@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using GRAppLib.DB;
 using zLib;
+using GenealogyResearchApp.GRAppLib.DB;
 
 namespace GenealogyResearchApp.ViewModel {
     public class MainViewModel : ViewModelBase, IDialogHelper {
@@ -18,9 +18,11 @@ namespace GenealogyResearchApp.ViewModel {
 		GRDBCont db;
 
 		public MainViewModel() {
-			Persons = new List<Person>();
-			Places = new List<Place>();
-
+			//Persons = new List<Person>();
+			//Places = new List<Place>();
+			View.RequestUpdate = t => {
+				Views.ForEach(v => v.Update(t));
+			};
 			Views.Add(new TestPersonViewModel());
 			SelectedView = Views.FirstOrDefault();
 		}
@@ -30,6 +32,9 @@ namespace GenealogyResearchApp.ViewModel {
 			Persons = db.Persons.ToList();
 			Places = db.Places.ToList();
 
+			View.RequestUpdate = t => {
+				Views.ForEach(v => v.Update(t));
+			};
 			Views.Add(new PersonViewModel());
 			SelectedView = Views.FirstOrDefault();
 		}

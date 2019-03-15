@@ -7,7 +7,7 @@
     <ProjectGuid>{5323B70E-36C0-4DE3-9237-2303B122C05E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GRAppLib</RootNamespace>
+    <RootNamespace>GenealogyResearchApp.GRAppLib</RootNamespace>
     <AssemblyName>GRAppLib</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -66,6 +66,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DBTypes.cs" />
     <Compile Include="DB\Event.cs">
       <DependentUpon>GRDB.tt</DependentUpon>
     </Compile>
@@ -119,7 +120,7 @@
     </Content>
     <Content Include="DB\GRDB.edmx.sql" />
     <Content Include="DB\GenealogyResearchAppDB.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="DB\GRDB.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -127,7 +128,7 @@
       <DependentUpon>GRDB.edmx</DependentUpon>
     </Content>
     <Content Include="DB\GenealogyResearchAppDB_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <DependentUpon>GenealogyResearchAppDB.mdf</DependentUpon>
     </Content>
   </ItemGroup>
@@ -145,6 +146,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\zLib\zLib.csproj">
+      <Project>{E3ADE982-86BB-42EE-8FAE-2AA55A08F81C}</Project>
+      <Name>zLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

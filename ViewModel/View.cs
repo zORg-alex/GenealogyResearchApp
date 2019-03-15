@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GenealogyResearchApp.GRAppLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,5 +16,7 @@ namespace GenealogyResearchApp.ViewModel {
 			}
 			set { type = value; RaisePropertyChanged("Type"); } }
 
+		public virtual void Update(DBTypes target) { }
+		public static Action<DBTypes> RequestUpdate = target => { };
 	}
 }

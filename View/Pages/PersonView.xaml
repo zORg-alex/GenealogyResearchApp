@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:cc="clr-namespace:GenealogyResearchApp.View.CustomControls" 
+      xmlns:grdb="clr-namespace:GenealogyResearchApp.GRAppLib.DB;assembly=GRAppLib"
       xmlns:local="clr-namespace:GenealogyResearchApp.View"
       xmlns:vm="clr-namespace:GenealogyResearchApp.ViewModel;assembly=ViewModel"
       mc:Ignorable="d" 
@@ -19,14 +20,49 @@
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <Grid Background="{DynamicResource Pallete.Primary.Brighter}">
-            <ListView ItemsSource="{Binding Persons}" SelectedItem="{Binding SelectedPerson}" ItemContainerStyle="{DynamicResource ListViewItemStyle}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <DockPanel>
+                <Button Content="New" Command="{Binding NewPerson}"/>
+            </DockPanel>
+            <ListView ItemsSource="{Binding Persons}" SelectedItem="{Binding SelectedPerson}" Grid.Row="1">
                 <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <cc:PersonShort/>
+                    <DataTemplate DataType="grdb:Person">
+                        <TextBlock MinHeight="20">
+                            <TextBlock Text="{Binding LastnameRaw}"/>
+                            <TextBlock Text="{Binding FirstnameRaw}"/>
+                            <TextBlock Text="{Binding MiddlenameRaw}"/>
+                        </TextBlock>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
         </Grid>
-        <Grid Grid.Column="1"/>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Person" FontSize="24" Margin="5"/>
+            <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition MinWidth="150"/>
+                    <ColumnDefinition MinWidth="150"/>
+                    <ColumnDefinition MinWidth="150"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Last Name"/>
+                <TextBlock Text="First Name" Grid.Column="1"/>
+                <TextBlock Text="Middle Name" Grid.Column="2"/>
+                <cc:NameBox DataContext="{Binding LastNameModel}" MinWidth="150" Margin="2" Grid.Row="1"/>
+                <cc:NameBox DataContext="{Binding FirstNameModel}" MinWidth="150" Margin="2" Grid.Row="1" Grid.Column="1"/>
+                <cc:NameBox DataContext="{Binding MiddleNameModel}" MinWidth="150" Margin="2" Grid.Column="2" Grid.Row="1"/>
+            </Grid>
+        </Grid>
     </Grid>
 </Page>

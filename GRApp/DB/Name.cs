@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GRAppLib.DB
+namespace GenealogyResearchApp.GRAppLib.DB
 {
     using System;
     using System.Collections.Generic;
@@ -17,20 +17,21 @@ namespace GRAppLib.DB
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Name()
         {
-            this.Persons = new HashSet<Person>();
-            this.Persons1 = new HashSet<Person>();
-            this.Persons2 = new HashSet<Person>();
+            this.PersonsWithNames = new HashSet<Person>();
+            this.PersonsWithLastNames = new HashSet<Person>();
+            this.PersonsWithMiddleNames = new HashSet<Person>();
         }
     
         public int Id { get; set; }
-        public int NameGroupId { get; set; }
+        public Nullable<int> NameGroupId { get; set; }
+        public string NameRaw { get; set; }
     
         public virtual NameGroup NameGroup { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Person> Persons { get; set; }
+        public virtual ICollection<Person> PersonsWithNames { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Person> Persons1 { get; set; }
+        public virtual ICollection<Person> PersonsWithLastNames { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Person> Persons2 { get; set; }
+        public virtual ICollection<Person> PersonsWithMiddleNames { get; set; }
     }
 }
