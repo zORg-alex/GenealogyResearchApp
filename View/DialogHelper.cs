@@ -55,6 +55,17 @@ namespace GenealogyResearchApp.View {
 			}
 			w.ShowDialog();
 		}
+		public static void OpenWindowWithObject(string Name, string OwnerName, Action<System.Windows.Forms.DialogResult> OnResult, object Context, Func<object, bool> Validator = null) {
+			Type windowType = Type.GetType(Name, false, true);
+			if (windowType == null) return;
+			WindowWithOnResult w = (WindowWithOnResult)Activator.CreateInstance(windowType);
+			w.DataContext = Context;
+			w.OnResult = OnResult;
+			foreach (Window ww in App.Current.Windows) {
+				if (ww.Name == OwnerName) w.Owner = ww;
+			}
+			w.ShowDialog();
+		}
 
 		public static void OpenWindowWithReturn(string Name, object DataContext, string OwnerName, Action<System.Windows.Forms.DialogResult> OnResult, Action<object> OnReturn, string Title = "", string Text = "", Func<object, bool> Validator = null) {
 			Type windowType = Type.GetType(Name, false, true);

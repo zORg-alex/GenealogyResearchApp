@@ -19,6 +19,7 @@ namespace GenealogyResearchApp.GRAppLib.DB
         {
             this.Events = new HashSet<Event>();
             this.EventsAttended = new HashSet<Event>();
+            this.Persons1 = new HashSet<Person>();
         }
     
         public int Id { get; set; }
@@ -28,6 +29,7 @@ namespace GenealogyResearchApp.GRAppLib.DB
         public Nullable<int> FirstNameId { get; set; }
         public Nullable<int> MiddleNameId { get; set; }
         public Nullable<int> LastNameId { get; set; }
+        public int Gender { get; set; }
         public Nullable<System.DateTime> BirthDate { get; set; }
         public Nullable<System.DateTime> DeathDate { get; set; }
         public Nullable<int> BirthPlaceId { get; set; }
@@ -46,5 +48,8 @@ namespace GenealogyResearchApp.GRAppLib.DB
         public virtual ICollection<Event> EventsAttended { get; set; }
         public virtual Person Father { get; set; }
         public virtual Person Mother { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Person> Persons1 { get; set; }
+        public virtual Person Person1 { get; set; }
     }
 }

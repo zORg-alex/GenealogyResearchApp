@@ -1,12 +1,11 @@
-﻿using GenealogyResearchApp.GRAppLib.DB;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using zLib;
 
-namespace GenealogyResearchApp.GRAppLib.DB {
+namespace GRAppLib.DB {
 	public partial class Person : Notifiable {
 		public List<Person> Children {
 			get {
@@ -15,9 +14,39 @@ namespace GenealogyResearchApp.GRAppLib.DB {
 					.Where(p => p.Mother.Id == this.Id || p.Father.Id == Id).ToList();
 			}
 		}
-		
-		public virtual Name FirstName_ { get { return FirstName; } set { FirstName = value; FirstnameRaw = (value != null) ? value.NameRaw : ""; RaisePropertyChanged("FirstnameRaw"); } }
-		public virtual Name LastName_ { get { return LastName; } set { LastName = value; LastnameRaw = (value != null) ? value.NameRaw : ""; RaisePropertyChanged("LastnameRaw"); } }
-		public virtual Name MiddleName_ { get { return MiddleName; } set { MiddleName = value; MiddlenameRaw = (value != null) ? value.NameRaw : ""; RaisePropertyChanged("MiddlenameRaw"); } }
+
+		private Person spouse;
+		private bool spouseIsNull;
+		public Person Spouse { get {
+				if (spouseIsNull) return null;
+
+				Event evt = Events.FirstOrDefault(e => e.Type == "Marriage");
+				if (evt != null) spouse = evt.Attendees.FirstOrDefault();
+				evt = EventsAttended.FirstOrDefault(e => e.Type == "Marriage" && e.Attendees.FirstOrDefault().Id == Id);
+				if (evt != null) spouse = evt.Person;
+				else spouseIsNull = true;
+
+				return spouse;
+			}
+		}
+		//TODO replace with creating grouped names
+		public string FirstName_ { get { return FirstnameRaw; } set { FirstnameRaw = value; } }
+		public string MiddleName_ { get { return MiddlenameRaw; } set { MiddlenameRaw = value; } }
+		public string LastName_ { get { return LastnameRaw; } set { LastnameRaw = value; } }
+
+
+		private bool isNull;
+		public bool IsNull { get { return isNull; } set { isNull = value; RaisePropertyChanged("IsNull"); } }
+
+		public bool GenderLocked { get; set; }
+
+		public UVMCommand CreatePerson;
+
+		public void SetNull(UVMCommand CreatePersonCommand) {
+			isNull = true;
+			CreatePerson = CreatePersonCommand;
+		}
+
+		public Gender Gender_ { get { return (Gender)this.Gender; } set { Gender = (int)value; } }
 	}
 }

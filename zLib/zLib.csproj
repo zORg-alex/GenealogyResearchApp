@@ -47,6 +47,7 @@
     <Compile Include="DateTimeExtension.cs" />
     <Compile Include="IDialogHelper.cs" />
     <Compile Include="ISelectable.cs" />
+    <Compile Include="IType.cs" />
     <Compile Include="LatinToASCIIConverter.cs" />
     <Compile Include="Notifiable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
