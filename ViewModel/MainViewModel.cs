@@ -39,6 +39,10 @@ namespace GenealogyResearchApp.ViewModel {
 			SelectedView = Views.FirstOrDefault();
 		}
 
+		public void Save() {
+			db.SaveChanges();
+		}
+
 		private View selectedview;
 		public View SelectedView {
 			get {
@@ -60,6 +64,7 @@ namespace GenealogyResearchApp.ViewModel {
 		}
 
 		private List<Place> places;
+
 		public List<Place> Places {
 			get { return places; }
 			set { places = value; RaisePropertyChanged("Places"); }

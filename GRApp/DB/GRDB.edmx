@@ -348,7 +348,7 @@
           <Property Name="Place_Id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Place" Relationship="GRApp.EventPlace" FromRole="Event" ToRole="Place" />
           <NavigationProperty Name="Person" Relationship="GRApp.PersonsEvent" FromRole="Event" ToRole="Person" />
-          <NavigationProperty Name="Persons" Relationship="GRApp.EventPersonAttended" FromRole="Event" ToRole="Person" />
+          <NavigationProperty Name="Attendees" Relationship="GRApp.EventPersonAttended" FromRole="Event" ToRole="Person" />
         </EntityType>
         <EntityType Name="NameGroup">
           <Key>

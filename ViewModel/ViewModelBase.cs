@@ -25,5 +25,6 @@ namespace GenealogyResearchApp.ViewModel {
 
 		}
 
+		public enum UpdateTarget { Name, Person, Event,  }
 	}
 }

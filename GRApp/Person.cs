@@ -1,11 +1,13 @@
-﻿using System;
+﻿using GenealogyResearchApp.GRAppLib.DB;
+using GRAppLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using zLib;
 
-namespace GRAppLib.DB {
+namespace GenealogyResearchApp.GRAppLib.DB {
 	public partial class Person : Notifiable {
 		public List<Person> Children {
 			get {
@@ -30,9 +32,9 @@ namespace GRAppLib.DB {
 			}
 		}
 		//TODO replace with creating grouped names
-		public string FirstName_ { get { return FirstnameRaw; } set { FirstnameRaw = value; } }
-		public string MiddleName_ { get { return MiddlenameRaw; } set { MiddlenameRaw = value; } }
-		public string LastName_ { get { return LastnameRaw; } set { LastnameRaw = value; } }
+		public virtual Name FirstName_ { get { return FirstName; } set { FirstName = value; FirstnameRaw = (value != null) ? value.NameRaw : ""; RaisePropertyChanged("FirstnameRaw"); } }
+		public virtual Name LastName_ { get { return LastName; } set { LastName = value; LastnameRaw = (value != null) ? value.NameRaw : ""; RaisePropertyChanged("LastnameRaw"); } }
+		public virtual Name MiddleName_ { get { return MiddleName; } set { MiddleName = value; MiddlenameRaw = (value != null) ? value.NameRaw : ""; RaisePropertyChanged("MiddlenameRaw"); } }
 
 
 		private bool isNull;
