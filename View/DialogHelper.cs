@@ -53,7 +53,7 @@ namespace GenealogyResearchApp.View {
 			foreach (Window ww in App.Current.Windows) {
 				if (ww.Name == OwnerName) w.Owner = ww;
 			}
-			w.ShowDialog();
+			w.Show();
 		}
 		public static void OpenWindowWithObject(string Name, string OwnerName, Action<System.Windows.Forms.DialogResult> OnResult, object Context, Func<object, bool> Validator = null) {
 			Type windowType = Type.GetType(Name, false, true);
@@ -64,7 +64,7 @@ namespace GenealogyResearchApp.View {
 			foreach (Window ww in App.Current.Windows) {
 				if (ww.Name == OwnerName) w.Owner = ww;
 			}
-			w.ShowDialog();
+			w.Show();
 		}
 
 		public static void OpenWindowWithReturn(string Name, object DataContext, string OwnerName, Action<System.Windows.Forms.DialogResult> OnResult, Action<object> OnReturn, string Title = "", string Text = "", Func<object, bool> Validator = null) {
@@ -77,7 +77,7 @@ namespace GenealogyResearchApp.View {
 			foreach (Window ww in App.Current.Windows) {
 				if (ww.Name == OwnerName) w.Owner = ww;
 			}
-			w.ShowDialog();
+			w.Show();
 		}
 
 		public class WindowContext : Notifiable {

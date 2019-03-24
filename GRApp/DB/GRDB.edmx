@@ -54,6 +54,7 @@
           <Property Name="DeathPlaceId" Type="int" />
           <Property Name="FatherId" Type="int" />
           <Property Name="MotherId" Type="int" />
+          <Property Name="Gender" Type="tinyint" />
         </EntityType>
         <EntityType Name="Places">
           <Key>
@@ -396,6 +397,7 @@
           <NavigationProperty Name="EventsAttended" Relationship="GRApp.EventPersonAttended" FromRole="Person" ToRole="Event" />
           <NavigationProperty Name="Father" Relationship="GRApp.PersonFather" FromRole="ChildRole" ToRole="FatherRole" />
           <NavigationProperty Name="Mother" Relationship="GRApp.PersonMother" FromRole="ChildRole" ToRole="MotherRole" />
+          <Property Name="Gender" Type="Byte" />
         </EntityType>
         <EntityType Name="Place">
           <Key>
@@ -582,7 +584,8 @@
     <EntitySetMapping Name="Persons">
       <EntityTypeMapping TypeName="IsTypeOf(GRApp.Person)">
         <MappingFragment StoreEntitySet="Persons">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="FirstnameRaw" ColumnName="FirstnameRaw" />
           <ScalarProperty Name="MiddlenameRaw" ColumnName="MiddlenameRaw" />
           <ScalarProperty Name="LastnameRaw" ColumnName="LastnameRaw" />

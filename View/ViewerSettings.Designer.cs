@@ -12,7 +12,7 @@ namespace GenealogyResearchApp.View {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.9.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
     internal sealed partial class ViewerSettings : global::System.Configuration.ApplicationSettingsBase {
         
         private static ViewerSettings defaultInstance = ((ViewerSettings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new ViewerSettings())));
@@ -133,13 +133,25 @@ namespace GenealogyResearchApp.View {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int WindowLastView {
+        [global::System.Configuration.DefaultSettingValueAttribute("PersonView")]
+        public string WindowLastView {
             get {
-                return ((int)(this["WindowLastView"]));
+                return ((string)(this["WindowLastView"]));
             }
             set {
                 this["WindowLastView"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("200")]
+        public float LeftColumnWidth {
+            get {
+                return ((float)(this["LeftColumnWidth"]));
+            }
+            set {
+                this["LeftColumnWidth"] = value;
             }
         }
     }

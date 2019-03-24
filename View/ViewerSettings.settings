@@ -29,8 +29,11 @@
     <Setting Name="WindowStartY" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="WindowLastView" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+    <Setting Name="WindowLastView" Type="System.String" Scope="User">
+      <Value Profile="(Default)">PersonView</Value>
+    </Setting>
+    <Setting Name="LeftColumnWidth" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">200</Value>
     </Setting>
   </Settings>
 </SettingsFile>

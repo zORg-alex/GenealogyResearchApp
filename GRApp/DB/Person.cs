@@ -34,6 +34,7 @@ namespace GenealogyResearchApp.GRAppLib.DB
         public Nullable<int> DeathPlaceId { get; set; }
         public Nullable<int> FatherId { get; set; }
         public Nullable<int> MotherId { get; set; }
+        public Nullable<byte> Gender { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Event> Events { get; set; }

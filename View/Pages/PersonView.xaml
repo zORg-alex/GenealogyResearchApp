@@ -10,59 +10,64 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800" d:DataContext="{DynamicResource TestPersonViewModel}"
       Title="PersonView">
-    <Page.Resources>
-        <vm:TestPersonViewModel x:Key="TestPersonViewModel"/>
-    </Page.Resources>
+	<Page.Resources>
+		<vm:TestPersonViewModel x:Key="TestPersonViewModel"/>
+	</Page.Resources>
 
-    <Grid Background="{DynamicResource Pallete.Primary.Brightest}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="2*"/>
-        </Grid.ColumnDefinitions>
-        <Grid Background="{DynamicResource Pallete.Primary.Brighter}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <DockPanel>
-                <Button Content="New" Command="{Binding NewPerson}"/>
-            </DockPanel>
-            <ListView ItemsSource="{Binding Persons}" SelectedItem="{Binding SelectedPerson}" Grid.Row="1">
-                <ListView.ItemTemplate>
-                    <DataTemplate DataType="grdb:Person">
-                        <TextBlock MinHeight="20">
-                            <TextBlock Text="{Binding LastnameRaw}"/>
-                            <TextBlock Text="{Binding FirstnameRaw}"/>
-                            <TextBlock Text="{Binding MiddlenameRaw}"/>
-                        </TextBlock>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </Grid>
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <TextBlock Text="Person" FontSize="24" Margin="5"/>
-            <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition MinWidth="150"/>
-                    <ColumnDefinition MinWidth="150"/>
-                    <ColumnDefinition MinWidth="150"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Last Name"/>
-                <TextBlock Text="First Name" Grid.Column="1"/>
-                <TextBlock Text="Middle Name" Grid.Column="2"/>
-                <cc:NameBox DataContext="{Binding LastNameModel}" MinWidth="150" Margin="2" Grid.Row="1"/>
-                <cc:NameBox DataContext="{Binding FirstNameModel}" MinWidth="150" Margin="2" Grid.Row="1" Grid.Column="1"/>
-                <cc:NameBox DataContext="{Binding MiddleNameModel}" MinWidth="150" Margin="2" Grid.Column="2" Grid.Row="1"/>
-            </Grid>
-        </Grid>
-    </Grid>
+	<Grid Background="{DynamicResource Pallete.Primary.Brightest}">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="{Binding LeftPaneWidth}" MinWidth="150"/>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+		<Border Background="{DynamicResource Pallete.Primary.Brighter}" Padding="0,0,2,0">
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition/>
+				</Grid.RowDefinitions>
+				<DockPanel>
+					<Button Content="New" Command="{Binding NewPerson}"/>
+				</DockPanel>
+				<ListView ItemsSource="{Binding Persons}" SelectedItem="{Binding SelectedPerson}" Grid.Row="1">
+					<ListView.ItemTemplate>
+						<DataTemplate DataType="grdb:Person">
+							<TextBlock MinHeight="20"><InlineUIContainer>
+    								<TextBlock Text="{Binding LastnameRaw}"/>
+    							</InlineUIContainer><Run Text=" "/><InlineUIContainer>
+    								<TextBlock Text="{Binding FirstnameRaw}"/>
+    							</InlineUIContainer><Run Text=" "/><InlineUIContainer>
+    								<TextBlock Text="{Binding MiddlenameRaw}"/>
+    							</InlineUIContainer></TextBlock>
+						</DataTemplate>
+					</ListView.ItemTemplate>
+				</ListView>
+			</Grid>
+		</Border>
+		<Grid Grid.Column="1">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition/>
+			</Grid.RowDefinitions>
+			<TextBlock Text="Person" FontSize="24" Margin="5"/>
+			<Grid HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition/>
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition MinWidth="150"/>
+					<ColumnDefinition MinWidth="150"/>
+					<ColumnDefinition MinWidth="150"/>
+				</Grid.ColumnDefinitions>
+				<TextBlock Text="Last Name"/>
+				<TextBlock Text="First Name" Grid.Column="1"/>
+				<TextBlock Text="Middle Name" Grid.Column="2"/>
+				<cc:NameBox DataContext="{Binding LastNameModel}" MinWidth="150" Margin="2" Grid.Row="1"/>
+				<cc:NameBox DataContext="{Binding FirstNameModel}" MinWidth="150" Margin="2" Grid.Row="1" Grid.Column="1"/>
+				<cc:NameBox DataContext="{Binding MiddleNameModel}" MinWidth="150" Margin="2" Grid.Column="2" Grid.Row="1"/>
+			</Grid>
+		</Grid>
+		<GridSplitter Style="{StaticResource VerticalGridSplitter}"/>
+	</Grid>
 </Page>

@@ -38,6 +38,9 @@ namespace GenealogyResearchApp.View {
 				(DataContext as IDialogHelper).OpenDialog = DialogHelper.OpenDialog;
 				(DataContext as IDialogHelper).OpenWindow = DialogHelper.OpenWindow;
 				(DataContext as IDialogHelper).OpenWindowWithReturn = DialogHelper.OpenWindowWithReturn;
+				(DataContext as IDialogHelper).OpenWindowWithObject = DialogHelper.OpenWindowWithObject;
+				((MainViewModel)DataContext).LastView = ViewerSettings.Default.WindowLastView;
+				((MainViewModel)DataContext).LeftPaneWidth = ViewerSettings.Default.LeftColumnWidth;
 			};
 
 			//this.Loaded += new RoutedEventHandler(win_Loaded);
@@ -79,8 +82,10 @@ namespace GenealogyResearchApp.View {
             ViewerSettings.Default.WindowStartHeight = Height;
             ViewerSettings.Default.WindowStartX = Left;
             ViewerSettings.Default.WindowStartY = Top;
-            ViewerSettings.Default.Save();
-            base.OnClosing(e);
+			ViewerSettings.Default.LeftColumnWidth = ((MainViewModel)DataContext).LeftPaneWidth;
+			ViewerSettings.Default.WindowLastView = ((MainViewModel)DataContext).LastView;
+			ViewerSettings.Default.Save();
+			base.OnClosing(e);
         }
 
 		private const int WM_SYSCOMMAND = 0X112;

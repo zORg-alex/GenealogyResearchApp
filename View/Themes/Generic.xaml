@@ -5,12 +5,13 @@
     xmlns:z="clr-namespace:zLib;assembly=zLib"
     xmlns:e="clr-namespace:EffectLibrary;assembly=EffectLibrary"
     xmlns:c="clr-namespace:GenealogyResearchApp.View.Controls"
+    xmlns:conv="clr-namespace:System.Windows.Converters;assembly=WindowsBase"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" mc:Ignorable="d">
 
-    <BooleanToVisibilityConverter x:Key="bool2VisibilityConverter" />
+	<BooleanToVisibilityConverter x:Key="bool2VisibilityConverter" />
 
-    <!-- http://paletton.com/#uid=c3x0I1b0f0klllz2zTZc3uWuFcbTj2v -->
+	<!-- http://paletton.com/#uid=c3x0I1b0f0klllz2zTZc3uWuFcbTj2v -->
 
     <SolidColorBrush x:Key="Pallete.Primary" Color="#2A516E"/>
     <SolidColorBrush x:Key="Pallete.Primary.Darker" Color="#07263E"/>
@@ -134,7 +135,7 @@
                         <!--<Path x:Name="p" Width="Auto" Height="Auto" Canvas.Left="20" Canvas.Top="23" Stretch="Fill" Fill="{DynamicResource Pallete.Primary.Darkest}" 
                               Data="M 1,3.8147e-006C 1.55229,3.8147e-006 2,0.44772 2,1C 2,1.55229 1.55228,2 1,2C 0.447715,2 -7.94729e-008,1.55229 -7.94729e-008,1C -7.94729e-008,0.44772 0.447713,3.8147e-006 1,3.8147e-006 Z M 1,3.00001C 1.55229,3.00001 2,3.44772 2,4.00001C 2,4.5523 1.55228,5.00001 1,5.00001C 0.447715,5.00001 -7.94728e-008,4.5523 -7.94728e-008,4.00001C -7.94728e-008,3.44772 0.447713,3.00001 1,3.00001 Z M 1,6C 1.55229,6 2,6.44772 2,7C 2,7.55229 1.55228,8 1,8C 0.447715,8 -7.94728e-008,7.55229 -7.94728e-008,7C -7.94728e-008,6.44772 0.447713,6 1,6 Z "
                               RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" VerticalAlignment="Center"/>-->
-                        <Path Data="F1 M1,0 l0,2 m-1,-1 l2,0 M1,4 l0,2 m-1,-1 l2,0 M1,8 l0,2 m-1,-1 l2,0" Stroke="{Binding ConverterParameter=.8, Converter={StaticResource BrushOpacityConverter}, Source={StaticResource Pallete.Primary.Darkest}}" HorizontalAlignment="Center" VerticalAlignment="Center" ClipToBounds="True"/>
+                        <Path Data="F1 M1,0 l0,2 m-1,-1 l2,0 M1,4 l0,2 m-1,-1 l2,0 M1,8 l0,2 m-1,-1 l2,0" Stroke="{StaticResource Pallete.Primary.Darkest}" HorizontalAlignment="Center" VerticalAlignment="Center" ClipToBounds="True"/>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

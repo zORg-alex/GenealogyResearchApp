@@ -36,8 +36,13 @@ namespace GenealogyResearchApp.View.CustomControls {
 					SetValue(IsNamePopupOpenProperty, false);
 				} else {
 					SetValue(IsNamePopupOpenProperty, true);
+					SetValue(IsNameGroupPopupOpenProperty, false);
 				}
 			}
+		}
+
+		protected override void OnMouseDown(MouseButtonEventArgs e) {
+			base.OnMouseDown(e);
 		}
 
 		private void NameGroupPopup_IsKeyboardFocusWithinChanged(object sender, DependencyPropertyChangedEventArgs e) {
@@ -83,9 +88,14 @@ namespace GenealogyResearchApp.View.CustomControls {
 		private static void IsNameGroupPopupOpenChanged(DependencyObject d, DependencyPropertyChangedEventArgs e) {
 			if ((bool)e.NewValue == true) {
 				d.Dispatcher.Invoke(() => {
-					Keyboard.Focus(((NameBox)d).NGPFilter);
+					Task.Delay(15).ContinueWith((t) => ((NameBox)d).Dispatcher.Invoke(() => ((NameBox)d).NGPFilter.Focus()));
 					((NameBox)d).SetValue(IsNamePopupOpenProperty, false);
 				});
+			} else {
+				//d.Dispatcher.Invoke(() => {
+				//	Keyboard.Focus(((NameBox)d).contentPresenter);
+				//	((NameBox)d).SetValue(IsNamePopupOpenProperty, true);
+				//});
 			}
 		}
 	}

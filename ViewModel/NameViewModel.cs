@@ -27,7 +27,7 @@ namespace GenealogyResearchApp.ViewModel {
 				RequestUpdate(DBTypes.Name);
 			}, p => this.RawName != null || this.RawName != "");
 			NewNameGroup = new UVMCommand(p => {
-				NameGroup g = new NameGroup() { PrimeName = NameGroupFilter };
+				NameGroup g = new NameGroup() { PrimeName = NameGroupFilter == "" ? this.Name.NameRaw : NameGroupFilter };
 				db.NameGroups.Add(g);
 				db.SaveChanges();
 				this.Name.NameGroup = g;
@@ -104,7 +104,7 @@ namespace GenealogyResearchApp.ViewModel {
 		}
 
 		Action<Name> NameChangedCallback = s => { };
-		
+
 		private List<Name> similarNames;
 		public List<Name> SimilarNames { get { return similarNames; } set { similarNames = value; RaisePropertyChanged("SimilarNames"); } }
 
@@ -115,17 +115,24 @@ namespace GenealogyResearchApp.ViewModel {
 		public List<NameGroup> FilteredNameGroups { get { return filteredNameGroups; } set { filteredNameGroups = value; RaisePropertyChanged("FilteredNameGroups"); } }
 
 		private NameGroup selectedNameGroup;
-		public NameGroup SelectedNameGroup { get { return selectedNameGroup; } set { selectedNameGroup = value; RaisePropertyChanged("SelectedNameGroup"); } }
+		public NameGroup SelectedNameGroup { get { return selectedNameGroup; } set { selectedNameGroup = value;
+				if (this.Name.NameGroup != value) {
+					this.Name.NameGroup = value;
+					NameChangedCallback(this.Name);
+				}
+				RaisePropertyChanged("SelectedNameGroup"); } }
 
 		private string nameGroupFilter;
-		public string NameGroupFilter { get { return nameGroupFilter; } set {
+		public string NameGroupFilter {
+			get { return nameGroupFilter; }
+			set {
 				nameGroupFilter = value;
 				List<NameGroup> l = new List<NameGroup>();
 				if (NameGroupFilter == "") {
 					l.AddRange(db.NameGroups);
 				} else {
 					if (Name != null && Name.NameGroup != null) l.Add(Name.NameGroup);
-					l.AddRange(db.NameGroups.Where(g=>g.PrimeName.Contains(NameGroupFilter)));
+					l.AddRange(db.NameGroups.Where(g => g.PrimeName.Contains(NameGroupFilter)));
 				}
 				FilteredNameGroups = l;
 				RaisePropertyChanged("NameGroupFilter");

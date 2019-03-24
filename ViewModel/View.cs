@@ -1,4 +1,5 @@
 ﻿using GenealogyResearchApp.GRAppLib;
+using GenealogyResearchApp.GRAppLib.DB;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +15,23 @@ namespace GenealogyResearchApp.ViewModel {
 				if (type == null) type = GetType().Name;
 				return type;
 			}
-			set { type = value; RaisePropertyChanged("Type"); } }
+			set { type = value; RaisePropertyChanged("Type");
+			}
+		}
 
+		private float leftPaneWidth;
+		public float LeftPaneWidth {
+			get { return leftPaneWidth; }
+			set {
+				if (leftPaneWidth != value) {
+					leftPaneWidth = value;
+					MainViewModel.Instance.LeftPaneWidth = value;
+				}
+			}
+		}
+
+		protected GRDBCont db = new GRDBCont();
+		
 		public virtual void Update(DBTypes target) { }
 		public static Action<DBTypes> RequestUpdate = target => { };
 	}
