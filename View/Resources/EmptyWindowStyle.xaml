@@ -23,9 +23,9 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Window}">
                     <Border x:Name="WindowBorder" BorderThickness="{Binding BorderThickness, RelativeSource={RelativeSource TemplatedParent}}"
-				BorderBrush="{Binding BorderBrush, RelativeSource={RelativeSource TemplatedParent}}"
-				Margin="{Binding Margin, RelativeSource={RelativeSource TemplatedParent}}"
-				Padding="{Binding Padding, RelativeSource={RelativeSource TemplatedParent}}">
+							BorderBrush="{Binding BorderBrush, RelativeSource={RelativeSource TemplatedParent}}"
+							Margin="{Binding Margin, RelativeSource={RelativeSource TemplatedParent}}"
+							Padding="{Binding Padding, RelativeSource={RelativeSource TemplatedParent}}">
                         <Grid x:Name="LayoutRoot" Background="{TemplateBinding Background}">
                             <ContentPresenter/>
                             <!-- window system buttons-->

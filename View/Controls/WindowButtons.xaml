@@ -7,18 +7,9 @@
              xmlns:shell="clr-namespace:Microsoft.Windows.Shell;assembly=Xceed.Wpf.AvalonDock"
              mc:Ignorable="d" 
              d:DesignHeight="50" d:DesignWidth="150" VerticalAlignment="Top" HorizontalAlignment="Right">
-    <UserControl.Resources>
-		<ResourceDictionary>
-            <!--<ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Viewer;component/Themes/BasicTheme.xaml"/>
-            </ResourceDictionary.MergedDictionaries>-->
-
-        </ResourceDictionary>
-    </UserControl.Resources>
-
-    <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Top" shell:WindowChrome.IsHitTestVisibleInChrome="True" HorizontalAlignment="Right" Height="20">
-
-        <c:zButton x:Name="Minimize" Width="32" Click="MinimizeButton_Click" >
+	<StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Top" shell:WindowChrome.IsHitTestVisibleInChrome="True" HorizontalAlignment="Right" Height="20">
+		
+		<c:zButton x:Name="Minimize" Width="32" Click="MinimizeButton_Click" >
             <Border Width="10" Height="9" BorderBrush="White" BorderThickness="0,0,0,2" SnapsToDevicePixels="True"/>
         </c:zButton>
 
@@ -30,7 +21,7 @@
 												SnapsToDevicePixels="True" HorizontalAlignment="Right" VerticalAlignment="Top"/>
             </Grid>
             <c:zButton.Style>
-                <Style TargetType="{x:Type c:zButton}" BasedOn="{StaticResource {x:Type c:zButton}}">
+                <Style TargetType="{x:Type c:zButton}" BasedOn="{StaticResource DefaultZButtonStyle}">
                     <Setter Property="Visibility" Value="Collapsed"/>
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding WindowState, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Value="Maximized">
@@ -44,7 +35,7 @@
         <c:zButton x:Name="Maximize" Margin="1,0,1,0" Width="32" Click="MaximizeButton_Click">
             <Border Width="10" Height="9" BorderBrush="White" BorderThickness="1,2,1,1" SnapsToDevicePixels="True"/>
             <c:zButton.Style>
-                <Style TargetType="{x:Type c:zButton}" BasedOn="{StaticResource {x:Type c:zButton}}">
+                <Style TargetType="{x:Type c:zButton}" BasedOn="{StaticResource DefaultZButtonStyle}">
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding WindowState, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Value="Maximized">
                             <Setter Property="Visibility" Value="Collapsed"/>

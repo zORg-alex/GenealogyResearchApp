@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GenealogyResearchApp.View.CustomControls {
+namespace GenealogyResearchApp.View.Controls {
 	/// <summary>
 	/// Interaction logic for PersonShort.xaml
 	/// </summary>

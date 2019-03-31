@@ -30,7 +30,7 @@ namespace GenealogyResearchApp.ViewModel {
 			}
 		}
 
-		protected GRDBCont db = new GRDBCont();
+		internal static zContext db = new zContext();
 		
 		public virtual void Update(DBTypes target) { }
 		public static Action<DBTypes> RequestUpdate = target => { };

@@ -9,11 +9,8 @@ using zLib;
 
 namespace GenealogyResearchApp.ViewModel {
 	public class PersonViewModel : View {
-
-		GRDBCont db;
-
+		
 		public PersonViewModel() {
-			db = new GRDBCont();
 			Persons = db.Persons.OrderBy(p=>p.FirstnameRaw).ToList();
 			SelectedPerson = persons.FirstOrDefault();
 			NewPerson = new UVMCommand(p=> {
@@ -56,9 +53,9 @@ namespace GenealogyResearchApp.ViewModel {
 			set {
 				if (SelectedPerson != value) {
 					selectedPerson = value;
-					FirstNameModel = new NameViewModel(db, SelectedPerson.FirstName, n => { SelectedPerson.FirstName_ = n; db.SaveChanges(); });
-					MiddleNameModel = new NameViewModel(db, SelectedPerson.MiddleName, n => { SelectedPerson.MiddleName_ = n; db.SaveChanges(); });
-					LastNameModel = new NameViewModel(db, SelectedPerson.LastName, n => { SelectedPerson.LastName_ = n; db.SaveChanges(); });
+					FirstNameModel = new NameViewModel(SelectedPerson.FirstName, n => { SelectedPerson.FirstName_ = n; db.SaveChanges(); });
+					MiddleNameModel = new NameViewModel(SelectedPerson.MiddleName, n => { SelectedPerson.MiddleName_ = n; db.SaveChanges(); });
+					LastNameModel = new NameViewModel(SelectedPerson.LastName, n => { SelectedPerson.LastName_ = n; db.SaveChanges(); });
 					RaisePropertyChanged("SelectedPerson");
 				}
 			}

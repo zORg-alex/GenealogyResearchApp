@@ -1,10 +1,9 @@
-﻿<UserControl x:Class="GenealogyResearchApp.View.CustomControls.PersonShort"
+﻿<UserControl x:Class="GenealogyResearchApp.View.Controls.PersonShort"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:grdb="clr-namespace:GenealogyResearchApp.GRAppLib.DB;assembly=GRAppLib" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:GenealogyResearchApp.View.CustomControls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
              d:DesignHeight="63.676" d:DesignWidth="359.081" d:DataContext="{DynamicResource TestPerson}"
              Background="{DynamicResource Pallete.Primary.Brighter}">

@@ -9,10 +9,8 @@ using zLib;
 
 namespace GenealogyResearchApp.ViewModel {
 	public class NameViewModel : View {
-		GRDBCont db;
 		public NameViewModel() { }
-		public NameViewModel(GRDBCont db, Name Name, Action<Name> NameChangedCallback) {
-			this.db = db;
+		public NameViewModel(Name Name, Action<Name> NameChangedCallback) {
 			this.Name = Name;
 			RawName = (Name != null) ? Name.NameRaw : "";
 			this.NameChangedCallback = NameChangedCallback;
@@ -34,7 +32,7 @@ namespace GenealogyResearchApp.ViewModel {
 				RequestUpdate(DBTypes.NameGroup);
 				NameGroupFilter = NameGroupFilter;
 			}, p => this.Name != null);
-			if (Name != null) SelectedNameGroup = Name.NameGroup;
+			if (Name != null) selectedNameGroup = Name.NameGroup;
 			NameGroupFilter = "";
 		}
 

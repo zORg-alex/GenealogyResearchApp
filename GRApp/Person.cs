@@ -49,6 +49,6 @@ namespace GenealogyResearchApp.GRAppLib.DB {
 			CreatePerson = CreatePersonCommand;
 		}
 
-		public Gender Gender_ { get { return (Gender)this.Gender; } set { Gender = (byte)value; } }
+		public Gender Gender_ { get { return Gender.HasValue ? (Gender)Gender.Value : (Gender)(int?)-1; } set { Gender = (byte)value; } }
 	}
 }

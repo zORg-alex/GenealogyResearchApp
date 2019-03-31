@@ -15,7 +15,7 @@ namespace GenealogyResearchApp.ViewModel {
 		public Action<string, string, Action<DialogResult>, string, string, Func<object, bool>> OpenWindow { get { return ViewModelBase._openWindow; } set { ViewModelBase._openWindow = value; } }
 		public Action<string, object, string, Action<DialogResult>, Action<object>, string, string, Func<object, bool>> OpenWindowWithReturn { get { return ViewModelBase._openWindowWithReturn; } set { ViewModelBase._openWindowWithReturn = value; } }
 
-		GRDBCont db;
+		zContext db;
 
 		public MainViewModel() {
 			instance = this;
@@ -30,10 +30,8 @@ namespace GenealogyResearchApp.ViewModel {
 
 		public MainViewModel(bool execute) {
 			instance = this;
-			db = new GRDBCont();
-			//Persons = db.Persons.ToList();
-			//Places = db.Places.ToList();
-
+			db = zContext.Deserialize(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\GRApp\\default-db.json");
+			View.db = db;
 			View.RequestUpdate = t => {
 				Views.ForEach(v => v.Update(t));
 			};
@@ -43,7 +41,7 @@ namespace GenealogyResearchApp.ViewModel {
 		}
 
 		public void Save() {
-			db.SaveChanges();
+			zContext.Serialize(db);
 		}
 
 		private View selectedview;

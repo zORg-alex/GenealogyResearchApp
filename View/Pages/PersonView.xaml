@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:cc="clr-namespace:GenealogyResearchApp.View.CustomControls" 
+      xmlns:c="clr-namespace:GenealogyResearchApp.View.Controls" 
       xmlns:grdb="clr-namespace:GenealogyResearchApp.GRAppLib.DB;assembly=GRAppLib"
       xmlns:local="clr-namespace:GenealogyResearchApp.View"
       xmlns:vm="clr-namespace:GenealogyResearchApp.ViewModel;assembly=ViewModel"
@@ -63,9 +63,9 @@
 				<TextBlock Text="Last Name"/>
 				<TextBlock Text="First Name" Grid.Column="1"/>
 				<TextBlock Text="Middle Name" Grid.Column="2"/>
-				<cc:NameBox DataContext="{Binding LastNameModel}" MinWidth="150" Margin="2" Grid.Row="1"/>
-				<cc:NameBox DataContext="{Binding FirstNameModel}" MinWidth="150" Margin="2" Grid.Row="1" Grid.Column="1"/>
-				<cc:NameBox DataContext="{Binding MiddleNameModel}" MinWidth="150" Margin="2" Grid.Column="2" Grid.Row="1"/>
+				<c:NameBox DataContext="{Binding LastNameModel}" MinWidth="150" Margin="2" Grid.Row="1"/>
+				<c:NameBox DataContext="{Binding FirstNameModel}" MinWidth="150" Margin="2" Grid.Row="1" Grid.Column="1"/>
+				<c:NameBox DataContext="{Binding MiddleNameModel}" MinWidth="150" Margin="2" Grid.Column="2" Grid.Row="1"/>
 			</Grid>
 		</Grid>
 		<GridSplitter Style="{StaticResource VerticalGridSplitter}"/>

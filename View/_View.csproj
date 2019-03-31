@@ -116,10 +116,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="CustomControls\NameBox.xaml.cs">
+    <Compile Include="Controls\NameBox.xaml.cs">
       <DependentUpon>NameBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomControls\PersonShort.xaml.cs">
+    <Compile Include="Controls\PersonShort.xaml.cs">
       <DependentUpon>PersonShort.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\NameLinkingView.xaml.cs">
@@ -137,11 +137,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="CustomControls\NameBox.xaml">
+    <Page Include="Controls\NameBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CustomControls\PersonShort.xaml">
+    <Page Include="Controls\PersonShort.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -174,7 +174,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Generic.xaml">
+    <Page Include="Resources\CommonStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
