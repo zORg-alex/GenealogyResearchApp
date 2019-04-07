@@ -338,6 +338,12 @@
             <End Role="MotherRole" EntitySet="Persons" />
             <End Role="ChildRole" EntitySet="Persons" />
           </AssociationSet>
+          <EntitySet Name="Documents" EntityType="GRApp.Document" />
+          <EntitySet Name="DocumentLines" EntityType="GRApp.DocumentLine" />
+          <AssociationSet Name="DocumentLineDocument" Association="GRApp.DocumentLineDocument">
+            <End Role="DocumentLine" EntitySet="DocumentLines" />
+            <End Role="Document" EntitySet="Documents" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Event">
           <Key>
@@ -545,6 +551,37 @@
             </Principal>
             <Dependent Role="ChildRole">
               <PropertyRef Name="MotherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Document">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" />
+          <Property Name="YearFrom" Type="Int32" Nullable="false" />
+          <Property Name="YearTo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DocumentLines" Relationship="GRApp.DocumentLineDocument" FromRole="Document" ToRole="DocumentLine" />
+        </EntityType>
+        <EntityType Name="DocumentLine">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Document" Relationship="GRApp.DocumentLineDocument" FromRole="DocumentLine" ToRole="Document" />
+          <Property Name="DocumentId" Type="Int32" Nullable="false" />
+          <Property Name="JSON" Type="String" Nullable="false" />
+        </EntityType>
+        <Association Name="DocumentLineDocument">
+          <End Type="GRApp.DocumentLine" Role="DocumentLine" Multiplicity="*" />
+          <End Type="GRApp.Document" Role="Document" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Document">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DocumentLine">
+              <PropertyRef Name="DocumentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

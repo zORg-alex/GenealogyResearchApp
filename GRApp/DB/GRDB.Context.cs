@@ -30,5 +30,7 @@ namespace GenealogyResearchApp.GRAppLib.DB
         public virtual DbSet<Name> Names { get; set; }
         public virtual DbSet<Person> Persons { get; set; }
         public virtual DbSet<Place> Places { get; set; }
+        public virtual DbSet<Document> Documents { get; set; }
+        public virtual DbSet<DocumentLine> DocumentLines { get; set; }
     }
 }

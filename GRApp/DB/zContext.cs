@@ -12,6 +12,14 @@ namespace GenealogyResearchApp.GRAppLib.DB {
 		[JsonIgnore]
 		string Path { get { return path; } set { path = value; } }
 
+		static JsonSerializer CurrentSerializer {
+			get {
+				var js = new JsonSerializer();
+				js.Converters.Add(new DB_JSONConverter());
+				return js;
+			}
+		}
+
 		public zContext() {
 
 		}
@@ -20,9 +28,11 @@ namespace GenealogyResearchApp.GRAppLib.DB {
 			zContext c;
 			try {
 				//TODO check if bk file exists and is older than current one
+
 				using (StreamReader file = File.OpenText(Path)) {
-					c = (zContext)new JsonSerializer().Deserialize(file, typeof(zContext));
+					c = (zContext)CurrentSerializer.Deserialize(file, typeof(zContext));
 				}
+				//c = JsonConvert.DeserializeObject<zContext>(File.ReadAllText(Path), new DB_JSONConverter());
 			} catch {
 				c = new zContext();
 			}
@@ -33,7 +43,7 @@ namespace GenealogyResearchApp.GRAppLib.DB {
 		public static void Serialize(zContext cont) {
 			Directory.CreateDirectory(cont.Path.Substring(0, cont.Path.LastIndexOf("\\")));
 			using (StreamWriter file = File.CreateText(cont.Path + "_")) {
-				new JsonSerializer().Serialize(file, cont);
+				CurrentSerializer.Serialize(file, cont);
 			}
 			File.Replace(cont.Path + "_", cont.Path, cont.Path + ".bk");
 			File.Delete(cont.Path + ".bk");

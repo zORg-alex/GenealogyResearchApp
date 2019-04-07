@@ -8,8 +8,8 @@
         <EntityTypeShape EntityType="GRApp.Event" Width="1.5" PointX="12.5" PointY="1.125" />
         <EntityTypeShape EntityType="GRApp.NameGroup" Width="1.5" PointX="4.875" PointY="3.125" />
         <EntityTypeShape EntityType="GRApp.Name" Width="1.5" PointX="7.125" PointY="2.875" />
-        <EntityTypeShape EntityType="GRApp.Person" Width="1.5" PointX="9.375" PointY="1.125" />
-        <EntityTypeShape EntityType="GRApp.Place" Width="1.5" PointX="12.5" PointY="4" />
+        <EntityTypeShape EntityType="GRApp.Person" Width="1.5" PointX="9.5" PointY="1" />
+        <EntityTypeShape EntityType="GRApp.Place" Width="1.5" PointX="12.5" PointY="4.5" />
         <AssociationConnector Association="GRApp.EventPlace" />
         <AssociationConnector Association="GRApp.PersonsEvent" />
         <AssociationConnector Association="GRApp.NameNameGroup" />
@@ -23,6 +23,9 @@
         <AssociationConnector Association="GRApp.PersonFather" />
         <AssociationConnector Association="GRApp.PersonMother" />
         <AssociationConnector Association="GRApp.FK_PersonFather" />
+        <EntityTypeShape EntityType="GRApp.Document" Width="1.5" PointX="4.5" PointY="6.5" />
+        <EntityTypeShape EntityType="GRApp.DocumentLine" Width="1.5" PointX="6.5" PointY="6.5" IsExpanded="true" />
+        <AssociationConnector Association="GRApp.DocumentLineDocument" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

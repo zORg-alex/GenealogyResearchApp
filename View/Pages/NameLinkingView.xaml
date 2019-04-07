@@ -46,14 +46,13 @@
 				</Grid.RowDefinitions>
 				<TextBlock Text="{Binding SelectedName.NameRaw}" FontSize="18"/>
 				<TextBlock Text="{Binding SelectedName.NameGroup.PrimeName}" Grid.Row="1" FontStyle="Italic"/>
-				<ListBox ItemsSource="{Binding NameGroups}" SelectedItem="{Binding SelectedName.NameGroup}" Grid.Row="2">
+				<ListBox ItemsSource="{Binding NameGroups}" SelectedItem="{Binding SelectedName.NameGroup, Mode=TwoWay}" Grid.Row="2">
 					<ListBox.ItemTemplate>
 						<DataTemplate DataType="grdb:NameGroup">
-							<TextBlock><InlineUIContainer>
-									<TextBlock Text="{Binding PrimeName}"/>
-								</InlineUIContainer><Run Text=" "/><InlineUIContainer>
-									<TextBlock Text="{Binding Names.Count, StringFormat=(\{0\})}"/>
-								</InlineUIContainer></TextBlock>
+							<TextBlock>
+								<TextBlock Text="{Binding PrimeName}"/>
+								<TextBlock Text="{Binding Names.Count, StringFormat=(\{0\})}"/>
+							</TextBlock>
 						</DataTemplate>
 					</ListBox.ItemTemplate>
 				</ListBox>
