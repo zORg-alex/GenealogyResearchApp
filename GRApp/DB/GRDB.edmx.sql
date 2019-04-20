@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/03/2018 00:38:20
+-- Date Created: 04/20/2019 18:47:58
 -- Generated from EDMX file: C:\Users\zORg\Source\Repos\GenealogyResearchApp\GRApp\DB\GRDB.edmx
 -- --------------------------------------------------
 
@@ -17,17 +17,11 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK__Persons__FatherI__361203C5]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Persons] DROP CONSTRAINT [FK__Persons__FatherI__361203C5];
+IF OBJECT_ID(N'[dbo].[FK_EventPersonAttended_Event]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[EventPerson] DROP CONSTRAINT [FK_EventPersonAttended_Event];
 GO
-IF OBJECT_ID(N'[dbo].[FK__Persons__MotherI__370627FE]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Persons] DROP CONSTRAINT [FK__Persons__MotherI__370627FE];
-GO
-IF OBJECT_ID(N'[dbo].[FK_EventPerson_Event]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[EventPerson] DROP CONSTRAINT [FK_EventPerson_Event];
-GO
-IF OBJECT_ID(N'[dbo].[FK_EventPerson_Person]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[EventPerson] DROP CONSTRAINT [FK_EventPerson_Person];
+IF OBJECT_ID(N'[dbo].[FK_EventPersonAttended_Person]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[EventPerson] DROP CONSTRAINT [FK_EventPersonAttended_Person];
 GO
 IF OBJECT_ID(N'[dbo].[FK_EventPlace]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Events] DROP CONSTRAINT [FK_EventPlace];
@@ -44,17 +38,23 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_NameNameGroup]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Names] DROP CONSTRAINT [FK_NameNameGroup];
 GO
+IF OBJECT_ID(N'[dbo].[FK_PersonBirthPlace]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Persons] DROP CONSTRAINT [FK_PersonBirthPlace];
+GO
 IF OBJECT_ID(N'[dbo].[FK_PersonDeathPlace]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Persons] DROP CONSTRAINT [FK_PersonDeathPlace];
 GO
-IF OBJECT_ID(N'[dbo].[FK_PersonEvent]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Events] DROP CONSTRAINT [FK_PersonEvent];
+IF OBJECT_ID(N'[dbo].[FK_PersonFather]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Persons] DROP CONSTRAINT [FK_PersonFather];
 GO
-IF OBJECT_ID(N'[dbo].[FK_PersonPlace]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Persons] DROP CONSTRAINT [FK_PersonPlace];
+IF OBJECT_ID(N'[dbo].[FK_PersonMother]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Persons] DROP CONSTRAINT [FK_PersonMother];
 GO
-IF OBJECT_ID(N'[dbo].[FK_PlacePlace]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Places] DROP CONSTRAINT [FK_PlacePlace];
+IF OBJECT_ID(N'[dbo].[FK_PersonsEvent]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Events] DROP CONSTRAINT [FK_PersonsEvent];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PlaceSubPlace]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Places] DROP CONSTRAINT [FK_PlaceSubPlace];
 GO
 
 -- --------------------------------------------------
@@ -96,14 +96,15 @@ GO
 -- Creating table 'NameGroups'
 CREATE TABLE [dbo].[NameGroups] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [PrimeName] nvarchar(max)  NOT NULL
+    [PrimeName] nvarchar(50)  NOT NULL
 );
 GO
 
 -- Creating table 'Names'
 CREATE TABLE [dbo].[Names] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [NameGroupId] int  NOT NULL
+    [NameGroupId] int  NULL,
+    [NameRaw] nvarchar(50)  NOT NULL
 );
 GO
 
@@ -121,7 +122,8 @@ CREATE TABLE [dbo].[Persons] (
     [BirthPlaceId] int  NULL,
     [DeathPlaceId] int  NULL,
     [FatherId] int  NULL,
-    [MotherId] int  NULL
+    [MotherId] int  NULL,
+    [Gender] tinyint  NULL
 );
 GO
 
@@ -133,10 +135,27 @@ CREATE TABLE [dbo].[Places] (
 );
 GO
 
+-- Creating table 'Documents'
+CREATE TABLE [dbo].[Documents] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Name] nvarchar(max)  NULL,
+    [YearFrom] int  NOT NULL,
+    [YearTo] int  NOT NULL
+);
+GO
+
+-- Creating table 'DocumentLines'
+CREATE TABLE [dbo].[DocumentLines] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [DocumentId] int  NOT NULL,
+    [JSON] nvarchar(max)  NOT NULL
+);
+GO
+
 -- Creating table 'EventPerson'
 CREATE TABLE [dbo].[EventPerson] (
     [EventsAttended_Id] int  NOT NULL,
-    [Persons_Id] int  NOT NULL
+    [Attendees_Id] int  NOT NULL
 );
 GO
 
@@ -174,10 +193,22 @@ ADD CONSTRAINT [PK_Places]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [EventsAttended_Id], [Persons_Id] in table 'EventPerson'
+-- Creating primary key on [Id] in table 'Documents'
+ALTER TABLE [dbo].[Documents]
+ADD CONSTRAINT [PK_Documents]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'DocumentLines'
+ALTER TABLE [dbo].[DocumentLines]
+ADD CONSTRAINT [PK_DocumentLines]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [EventsAttended_Id], [Attendees_Id] in table 'EventPerson'
 ALTER TABLE [dbo].[EventPerson]
 ADD CONSTRAINT [PK_EventPerson]
-    PRIMARY KEY CLUSTERED ([EventsAttended_Id], [Persons_Id] ASC);
+    PRIMARY KEY CLUSTERED ([EventsAttended_Id], [Attendees_Id] ASC);
 GO
 
 -- --------------------------------------------------
@@ -328,10 +359,10 @@ ADD CONSTRAINT [FK_EventPersonAttended_Event]
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating foreign key on [Persons_Id] in table 'EventPerson'
+-- Creating foreign key on [Attendees_Id] in table 'EventPerson'
 ALTER TABLE [dbo].[EventPerson]
 ADD CONSTRAINT [FK_EventPersonAttended_Person]
-    FOREIGN KEY ([Persons_Id])
+    FOREIGN KEY ([Attendees_Id])
     REFERENCES [dbo].[Persons]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -340,7 +371,7 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_EventPersonAttended_Person'
 CREATE INDEX [IX_FK_EventPersonAttended_Person]
 ON [dbo].[EventPerson]
-    ([Persons_Id]);
+    ([Attendees_Id]);
 GO
 
 -- Creating foreign key on [DeathPlaceId] in table 'Persons'
@@ -371,6 +402,21 @@ GO
 CREATE INDEX [IX_FK_PersonMother]
 ON [dbo].[Persons]
     ([MotherId]);
+GO
+
+-- Creating foreign key on [DocumentId] in table 'DocumentLines'
+ALTER TABLE [dbo].[DocumentLines]
+ADD CONSTRAINT [FK_DocumentLineDocument]
+    FOREIGN KEY ([DocumentId])
+    REFERENCES [dbo].[Documents]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_DocumentLineDocument'
+CREATE INDEX [IX_FK_DocumentLineDocument]
+ON [dbo].[DocumentLines]
+    ([DocumentId]);
 GO
 
 -- --------------------------------------------------

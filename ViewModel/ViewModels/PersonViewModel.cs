@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using zLib;
 
 namespace GenealogyResearchApp.ViewModel {
-	public class PersonViewModel : View {
+	public class PersonViewModel : ViewModelBase {
 		
 		public PersonViewModel() {
 			Persons = db.Persons.OrderBy(p=>p.FirstnameRaw).ToList();

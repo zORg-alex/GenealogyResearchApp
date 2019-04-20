@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using zLib;
 
 namespace GenealogyResearchApp.ViewModel {
-	public class NameViewModel : View {
+	public class NameViewModel : ViewModelBase {
 		public NameViewModel() { }
 		public NameViewModel(Name Name, Action<Name> NameChangedCallback) {
 			this.Name = Name;

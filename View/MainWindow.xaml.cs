@@ -35,10 +35,6 @@ namespace GenealogyResearchApp.View {
 
 			//Assign overlay control's (or other window's) ViewModel's OpenDialog
 			DataContextChanged += (dp, e) => {
-				(DataContext as IDialogHelper).OpenDialog = DialogHelper.OpenDialog;
-				(DataContext as IDialogHelper).OpenWindow = DialogHelper.OpenWindow;
-				(DataContext as IDialogHelper).OpenWindowWithReturn = DialogHelper.OpenWindowWithReturn;
-				(DataContext as IDialogHelper).OpenWindowWithObject = DialogHelper.OpenWindowWithObject;
 				((MainViewModel)DataContext).LastView = ViewerSettings.Default.WindowLastView;
 				((MainViewModel)DataContext).LeftPaneWidth = ViewerSettings.Default.LeftColumnWidth;
 			};

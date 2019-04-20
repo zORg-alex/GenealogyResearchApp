@@ -125,6 +125,9 @@
     <Compile Include="Pages\NameLinkingView.xaml.cs">
       <DependentUpon>NameLinkingView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\FamilyView.xaml.cs">
+      <DependentUpon>FamilyView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\PersonView.xaml.cs">
       <DependentUpon>PersonView.xaml</DependentUpon>
     </Compile>
@@ -165,6 +168,10 @@
     <Page Include="Pages\NameLinkingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\FamilyView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\PersonView.xaml">
       <SubType>Designer</SubType>

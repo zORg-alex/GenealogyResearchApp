@@ -38,14 +38,26 @@ namespace zLib {
 		public string Name = "UVMCommand";
 		public Action<object> Exec;
 		public Func<object, bool> CanExec;
-		bool staticCanExecute;
+		bool staticCanExecute = true;
+		public bool Finished { get; set; } = true;
 
+		UVMCommand() { }
 		/// <summary>
 		/// Creates a <see cref="UVMCommand"/> with a conditional CanExecute.
 		/// </summary>
 		public UVMCommand(Action<object> Execute, Func<object, bool> CanExecute) {
 			this.Exec = Execute;
 			this.CanExec = CanExecute;
+		}
+		public static UVMCommand Async(Action<object> Execute, Func<object, bool> CanExecute) {
+			var c = new UVMCommand();
+			c.Exec = p => {
+				Execute.BeginInvoke(null, ar => { c.Finished = true; }, null);
+			};
+			c.CanExec = CanExecute;
+			c.Finished = false;
+
+			return c;
 		}
 
 		/// <summary>
@@ -58,6 +70,17 @@ namespace zLib {
 			staticCanExecute = CanExecute;
 			this.CanExec = StaticCanExecute;
 		}
+		public static UVMCommand Async(Action<object> Execute, bool CanExecute) {
+			var c = new UVMCommand();
+			c.Exec = p => {
+				Execute.BeginInvoke(null, ar => { c.Finished = true; }, null);
+			};
+			c.staticCanExecute = CanExecute;
+			c.CanExec = c.StaticCanExecute;
+			c.Finished = false;
+
+			return c;
+		}
 
 		/// <summary>
 		/// Creates a <see cref="UVMCommand"/> with always true CanExecute.
@@ -66,8 +89,17 @@ namespace zLib {
 		/// <param name="CanExecute"></param>
 		public UVMCommand(Action<object> Execute) {
 			this.Exec = Execute;
-			staticCanExecute = true;
 			this.CanExec = StaticCanExecute;
+		}
+		public static UVMCommand Async(Action<object> Execute) {
+			var c = new UVMCommand();
+			c.Finished = false;
+			c.Exec = p => {
+				Execute.BeginInvoke(null, ar => { c.Finished = true; }, null);
+			};
+			c.CanExec = c.StaticCanExecute;
+
+			return c;
 		}
 
 		/// <summary>
@@ -77,6 +109,17 @@ namespace zLib {
 			this.Name = Name;
 			this.Exec = Execute;
 			this.CanExec = CanExecute;
+		}
+		public static UVMCommand Async(string Name, Action<object> Execute, Func<object, bool> CanExecute) {
+			var c = new UVMCommand();
+			c.Name = Name;
+			c.Exec = p => {
+				Execute.BeginInvoke(null, ar => { c.Finished = true; }, null);
+			};
+			c.CanExec = CanExecute;
+			c.Finished = false;
+
+			return c;
 		}
 
 		/// <summary>
@@ -88,6 +131,18 @@ namespace zLib {
 			staticCanExecute = CanExecute;
 			this.CanExec = StaticCanExecute;
 		}
+		public static UVMCommand Async(string Name, Action<object> Execute, bool CanExecute) {
+			var c = new UVMCommand();
+			c.Name = Name;
+			c.Exec = p => {
+				Execute.BeginInvoke(null, ar => { c.Finished = true; }, null);
+			};
+			c.staticCanExecute = CanExecute;
+			c.CanExec = c.StaticCanExecute;
+			c.Finished = false;
+
+			return c;
+		}
 
 		/// <summary>
 		/// Creates a <see cref="UVMCommand"/> with a name and always true CanExecute.
@@ -97,8 +152,18 @@ namespace zLib {
 		public UVMCommand(string Name, Action<object> Execute) {
 			this.Name = Name;
 			this.Exec = Execute;
-			staticCanExecute = true;
 			this.CanExec = StaticCanExecute;
+		}
+		public static UVMCommand Async(string Name, Action<object> Execute) {
+			var c = new UVMCommand();
+			c.Name = Name;
+			c.Exec = p => {
+				Execute.BeginInvoke(null, ar => { c.Finished = true; }, null);
+			};
+			c.CanExec = c.StaticCanExecute;
+			c.Finished = false;
+
+			return c;
 		}
 
 		public event EventHandler CanExecuteChanged {

@@ -52,13 +52,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainViewModel.cs" />
-    <Compile Include="NameLinkingViewModel.cs" />
-    <Compile Include="NameViewModel.cs" />
-    <Compile Include="PersonViewModel.cs" />
+    <Compile Include="ViewModels\FamilyViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\NameLinkingViewModel.cs" />
+    <Compile Include="ViewModels\NameViewModel.cs" />
+    <Compile Include="ViewModels\PersonViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestPersonViewModel.cs" />
-    <Compile Include="View.cs" />
     <Compile Include="ViewModelBase.cs" />
   </ItemGroup>
   <ItemGroup>

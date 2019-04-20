@@ -46,12 +46,16 @@ namespace GenealogyResearchApp.View {
 			//var a = 0;
 			//a++;
 
-			Thread w = new Thread(() => {
+			Thread vmlThread = new Thread(() => {
 				MainViewModel = new MainViewModel(true);
+				ViewModelBase._openDialog = DialogHelper.OpenDialog;
+				ViewModelBase._openWindow = DialogHelper.OpenWindow;
+				ViewModelBase._openWindowWithObject = DialogHelper.OpenWindowWithObject;
+				ViewModelBase._openWindowWithReturn = DialogHelper.OpenWindowWithReturn;
 				MainViewModelReady = true;
 			});
-			w.Name = "MainViewModel Loader";
-			w.Start();
+			vmlThread.Name = "MainViewModel Loader Thread";
+			vmlThread.Start();
 
 			bool exit = false;
 			while (!exit) {
@@ -61,7 +65,6 @@ namespace GenealogyResearchApp.View {
 					exit = true;
 				}
 			}
-
 		}
 
 		async public void InitAsync() {

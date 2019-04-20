@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using zLib;
 
 namespace GenealogyResearchApp.GRAppLib.DB {
-	public class Name_ : Name{
+	public class Name_ : Name {
 		public override NameGroup NameGroup { get { return base.NameGroup; } set { base.NameGroup = value; RaisePropertyChanged("NameGroup"); } }
 	}
 

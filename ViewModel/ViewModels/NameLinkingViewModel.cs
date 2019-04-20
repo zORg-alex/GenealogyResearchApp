@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using GenealogyResearchApp.GRAppLib;
 
 namespace GenealogyResearchApp.ViewModel {
-	public class NameLinkingViewModel : View {
+	public class NameLinkingViewModel : ViewModelBase {
 		public NameLinkingViewModel() {
 			NameGroups = db.NameGroups.ToList();
 			Filter = "";
